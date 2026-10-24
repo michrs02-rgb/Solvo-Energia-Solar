@@ -1,0 +1,6 @@
+{
+  "name": "Solvo Energia - Landing Page Solar Premium",
+  "description": "Landing page de alta conversão para energia solar e sustentabilidade com modelo 3D interativo Three.js, simulador financeiro e integração com WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

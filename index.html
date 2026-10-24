@@ -1,0 +1,2454 @@
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solvo Energia • Engenharia Fotovoltaica de Alta Precisão & Sustentabilidade</title>
+    <meta name="description" content="Engenharia solar fotovoltaica autônoma N-Type de ultraeficiência. Reduza até 95% da sua conta de luz com garantia linear de 25 anos e tecnologia de armazenamento inteligente." />
+    <meta property="og:title" content="Solvo Energia • O Futuro da Energia Solar Autônoma" />
+    <meta property="og:description" content="Simule sua economia em tempo real e descubra sistemas fotovoltaicos residenciais e corporativos de alta rentabilidade." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Environment & Extension Sandbox Polyfill for fetch setter -->
+    <script>
+      (function() {
+        try {
+          var _origFetch = window.fetch;
+          var _fetchHandler = _origFetch;
+          Object.defineProperty(window, 'fetch', {
+            configurable: true,
+            enumerable: true,
+            get: function() {
+              return _fetchHandler;
+            },
+            set: function(fn) {
+              _fetchHandler = fn;
+            }
+          });
+        } catch (e) {}
+
+        try {
+          if (window.XMLHttpRequest) {
+            var _origXHR = window.XMLHttpRequest;
+            var _xhrHandler = _origXHR;
+            Object.defineProperty(window, 'XMLHttpRequest', {
+              configurable: true,
+              enumerable: true,
+              get: function() {
+                return _xhrHandler;
+              },
+              set: function(fn) {
+                _xhrHandler = fn;
+              }
+            });
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Google Fonts: Syne, Space Grotesk, Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+
+    <!-- FontAwesome 6.4 CDN (Strict: No native emojis) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              solvo: {
+                950: '#040711',
+                900: '#070c1b',
+                850: '#0b1328',
+                800: '#101c38',
+                700: '#192b52',
+                amber: '#f59e0b',
+                gold: '#fbbf24',
+                glow: '#fde047',
+                emerald: '#10b981',
+                mint: '#34d399',
+                cyan: '#38bdf8',
+                silver: '#94a3b8'
+              }
+            },
+            fontFamily: {
+              syne: ['Syne', 'sans-serif'],
+              space: ['"Space Grotesk"', 'monospace'],
+              sans: ['Inter', 'sans-serif']
+            },
+            boxShadow: {
+              'solar-glow': '0 0 35px -5px rgba(245, 158, 11, 0.35)',
+              'emerald-glow': '0 0 35px -5px rgba(16, 185, 129, 0.35)',
+              'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      /* Custom luxury glassmorphism & gradients */
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #040711;
+        color: #f1f5f9;
+        overflow-x: hidden;
+      }
+
+      .font-monumental {
+        font-family: 'Syne', sans-serif;
+      }
+
+      .font-tech {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+
+      .glass-card {
+        background: rgba(11, 19, 40, 0.65);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .glass-card-interactive {
+        background: rgba(11, 19, 40, 0.6);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .glass-card-interactive:hover {
+        background: rgba(16, 28, 56, 0.85);
+        border-color: rgba(245, 158, 11, 0.4);
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px -15px rgba(245, 158, 11, 0.15);
+      }
+
+      .glass-pill {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .solar-gradient-text {
+        background: linear-gradient(135deg, #ffffff 0%, #fbbf24 60%, #f59e0b 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .emerald-gradient-text {
+        background: linear-gradient(135deg, #ffffff 0%, #34d399 50%, #10b981 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .radial-glow-top {
+        background: radial-gradient(circle at 50% -10%, rgba(245, 158, 11, 0.18) 0%, rgba(16, 185, 129, 0.08) 45%, transparent 70%);
+      }
+
+      /* Custom Range Slider */
+      input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        background: #1e293b;
+        border-radius: 9999px;
+        height: 8px;
+        outline: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #fbbf24;
+        cursor: pointer;
+        box-shadow: 0 0 15px rgba(251, 191, 36, 0.8);
+        border: 3px solid #070c1b;
+        transition: transform 0.2s ease;
+      }
+      input[type="range"]::-webkit-slider-thumb:hover {
+        transform: scale(1.15);
+      }
+
+      /* Interactive Brazil Solar Map Styles */
+      .brazil-region {
+        transform-origin: 50% 50%;
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        cursor: pointer;
+      }
+      .brazil-region:hover {
+        filter: brightness(1.28) drop-shadow(0 0 14px rgba(251, 191, 36, 0.7));
+        transform: scale(1.018);
+      }
+      .brazil-region.active-region {
+        filter: brightness(1.38) drop-shadow(0 0 20px rgba(251, 191, 36, 0.95));
+        stroke: #ffffff !important;
+        stroke-width: 2.8px !important;
+      }
+      @keyframes mapPulse {
+        0%, 100% { opacity: 0.3; transform: scale(0.9); }
+        50% { opacity: 0.9; transform: scale(1.3); }
+      }
+      .map-ping {
+        animation: mapPulse 2.2s infinite ease-in-out;
+        transform-origin: center;
+      }
+    </style>
+  </head>
+  <body class="relative min-h-screen selection:bg-solvo-amber selection:text-solvo-950">
+
+    <!-- Ambient Lighting Background Accents -->
+    <div class="pointer-events-none fixed inset-0 radial-glow-top z-0"></div>
+    <div class="pointer-events-none fixed top-1/4 right-0 w-[550px] h-[550px] bg-solvo-amber/5 rounded-full blur-[140px] z-0"></div>
+    <div class="pointer-events-none fixed bottom-1/3 left-0 w-[600px] h-[600px] bg-solvo-emerald/5 rounded-full blur-[160px] z-0"></div>
+
+    <!-- 1. HEADER FIXO COM LOGO TIPOGRÁFICO E BOTÃO GLOW -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent bg-solvo-950/70 backdrop-blur-xl">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        
+        <!-- Logo Tipográfico Solvo Energia -->
+        <a href="#hero" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-solvo-amber to-solvo-emerald p-[1px] shadow-solar-glow/40 transition-transform duration-300 group-hover:scale-105">
+            <div class="w-full h-full bg-solvo-900 rounded-[11px] flex items-center justify-center">
+              <i class="fa-solid fa-solar-panel text-solvo-gold text-lg group-hover:text-solvo-glow transition-colors"></i>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-monumental text-xl tracking-wider font-extrabold text-white leading-none">
+              SOLVO<span class="text-solvo-amber">.</span>
+            </span>
+            <span class="font-tech text-[10px] tracking-[0.28em] text-solvo-silver/80 uppercase">
+              Energia Solar
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+          <a href="#tecnologia" class="hover:text-solvo-gold transition-colors flex items-center gap-2">
+            <i class="fa-solid fa-cube text-xs text-solvo-amber"></i>
+            Tecnologia 3D
+          </a>
+          <a href="#metricas" class="hover:text-solvo-gold transition-colors">Performance</a>
+          <a href="#solucoes" class="hover:text-solvo-gold transition-colors">Soluções</a>
+          <a href="#diferenciais" class="hover:text-solvo-gold transition-colors">Diferenciais</a>
+          <a href="#simulador" class="hover:text-solvo-gold transition-colors">Simulador</a>
+          <a href="#faq" class="hover:text-solvo-gold transition-colors">Dúvidas</a>
+        </nav>
+
+        <!-- Right Side CTA & Operational Status -->
+        <div class="flex items-center gap-4">
+          <div class="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-solvo-850/80 border border-emerald-500/20 text-[11px] font-tech text-emerald-400">
+            <i class="fa-solid fa-circle text-[6px] text-emerald-400 animate-pulse"></i>
+            REDE 100% OPERACIONAL
+          </div>
+
+          <a href="#simulador" class="relative group px-5 py-2.5 rounded-xl font-tech text-xs tracking-wider uppercase font-semibold text-solvo-950 bg-gradient-to-r from-solvo-gold to-solvo-amber hover:from-solvo-glow hover:to-solvo-gold transition-all duration-300 shadow-solar-glow hover:shadow-solar-glow/80 hover:scale-[1.02] flex items-center gap-2">
+            <i class="fa-solid fa-calculator text-xs"></i>
+            <span>Simular Economia</span>
+          </a>
+
+          <!-- Mobile Menu Button -->
+          <button id="mobile-toggle" aria-label="Abrir menu" class="md:hidden w-10 h-10 rounded-lg glass-pill flex items-center justify-center text-slate-200 hover:text-white">
+            <i class="fa-solid fa-bars-staggered"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-nav" class="hidden md:hidden border-b border-white/10 bg-solvo-950/95 backdrop-blur-2xl px-6 py-6 transition-all duration-300">
+        <div class="flex flex-col gap-4 text-sm font-medium text-slate-200">
+          <a href="#tecnologia" class="py-2 flex items-center gap-3 border-b border-white/5">
+            <i class="fa-solid fa-cube text-solvo-amber"></i> Tecnologia 3D
+          </a>
+          <a href="#metricas" class="py-2 border-b border-white/5">Performance & Dados</a>
+          <a href="#solucoes" class="py-2 border-b border-white/5">Soluções Corporativas & Residenciais</a>
+          <a href="#diferenciais" class="py-2 border-b border-white/5">Engenharia Solvo</a>
+          <a href="#simulador" class="py-2 border-b border-white/5">Simulador de Economia</a>
+          <a href="#faq" class="py-2">Dúvidas Frequentes</a>
+          <a href="#simulador" class="mt-2 w-full text-center py-3 rounded-xl bg-solvo-amber text-solvo-950 font-bold font-tech uppercase text-xs">
+            Solicitar Estudo Gratuito
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. HERO SECTION COM TRIDIMENSIONALIDADE (THREE.JS DRAMÁTICO A 35°) -->
+    <section id="hero" class="relative pt-28 lg:pt-36 pb-20 overflow-hidden bg-grid-subtle">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Top Centered Pill Badge -->
+        <div class="flex justify-center mb-6">
+          <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass-pill text-xs font-tech tracking-wide text-solvo-gold/90 border border-solvo-gold/30">
+            <i class="fa-solid fa-certificate text-solvo-amber"></i>
+            <span class="tracking-widest uppercase font-semibold">EDIÇÃO EXCLUSIVA • 2026</span>
+            <span class="w-1 h-1 rounded-full bg-solvo-gold"></span>
+            <span class="text-slate-300">EFICIÊNCIA TIER 1</span>
+          </div>
+        </div>
+
+        <!-- Monumental Hero Typography -->
+        <div class="text-center max-w-4xl mx-auto mb-10">
+          <h1 class="font-monumental text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold uppercase tracking-tight text-white leading-[1.08]">
+            O Futuro da Energia é <br class="hidden sm:inline" />
+            <span class="solar-gradient-text">Autônomo, Limpo</span> <br class="hidden sm:inline" />
+            e Altamente Rentável.
+          </h1>
+          <p class="mt-6 text-base sm:text-lg lg:text-xl text-slate-300/90 font-sans font-light max-w-2xl mx-auto leading-relaxed">
+            Engenharia solar fotovoltaica N-Type de última geração. Reduza em até <span class="text-solvo-gold font-semibold">95%</span> sua conta de luz, blinde seu patrimônio contra os aumentos tarifários da concessionária e alcance autonomia definitiva.
+          </p>
+
+          <!-- Dual Main CTAs -->
+          <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="#simulador" class="w-full sm:w-auto px-8 py-4 rounded-xl font-tech text-sm tracking-widest uppercase font-bold text-solvo-950 bg-gradient-to-r from-solvo-gold via-solvo-amber to-amber-500 hover:from-solvo-glow hover:to-solvo-amber shadow-solar-glow transition-all duration-300 hover:scale-[1.03] flex items-center justify-center gap-3">
+              <i class="fa-solid fa-bolt-lightning text-sm"></i>
+              <span>Simular Economia Imediata</span>
+            </a>
+            <a href="#tecnologia" class="w-full sm:w-auto px-8 py-4 rounded-xl font-tech text-sm tracking-wider uppercase font-semibold text-slate-200 glass-card hover:border-solvo-gold/40 hover:text-white transition-all duration-300 flex items-center justify-center gap-3">
+              <i class="fa-solid fa-cube text-solvo-gold"></i>
+              <span>Interagir em 3D</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 3D HERO STAGE & ORBITAL SHOWCASE -->
+        <div id="tecnologia" class="relative mt-4 lg:mt-12 rounded-3xl glass-card border border-white/10 p-4 sm:p-6 lg:p-8 shadow-2xl overflow-hidden">
+          
+          <!-- Background Ambient Gradient on Stage -->
+          <div class="absolute -top-20 -left-20 w-80 h-80 bg-solvo-amber/15 rounded-full blur-[100px] pointer-events-none"></div>
+          <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-solvo-emerald/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+          <!-- Top Stage HUD Info Bar -->
+          <div class="relative z-20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-4 mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-2.5 h-2.5 rounded-full bg-solvo-gold animate-ping"></div>
+              <span class="font-tech text-xs tracking-widest uppercase text-slate-300">
+                RENDERIZAÇÃO INTERATIVA 3D • ANGULAÇÃO SOLAR OTIMIZADA (35°)
+              </span>
+            </div>
+            <div class="flex items-center gap-3 text-xs font-tech text-slate-400">
+              <i class="fa-solid fa-hand-pointer text-solvo-gold"></i>
+              <span>Arraste ou mova o cursor para interagir com o módulo</span>
+            </div>
+          </div>
+
+          <!-- Main Stage Layout: 3D Canvas + Orbital Showcase Cards -->
+          <div class="relative grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            
+            <!-- Three.js Canvas Container (Central Stage) -->
+            <div class="lg:col-span-8 relative min-h-[380px] sm:min-h-[460px] lg:min-h-[520px] rounded-2xl overflow-hidden bg-solvo-950/80 border border-white/5 flex items-center justify-center">
+              <canvas id="solar-hero-canvas" class="w-full h-full cursor-grab active:cursor-grabbing block"></canvas>
+              
+              <!-- Floating On-Canvas Telemetry HUD -->
+              <div class="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-3 pointer-events-none">
+                <div class="glass-pill px-3 py-1.5 rounded-lg text-[11px] font-tech text-slate-300 flex items-center gap-2">
+                  <i class="fa-solid fa-compass-drafting text-solvo-amber"></i>
+                  <span>Inclinação: <strong class="text-white">35.0° Azimutal Sul</strong></span>
+                </div>
+                <div class="glass-pill px-3 py-1.5 rounded-lg text-[11px] font-tech text-emerald-400 flex items-center gap-2">
+                  <i class="fa-solid fa-sun text-solvo-gold"></i>
+                  <span>Geração Estimada: <strong class="text-white">890 kWh/mês</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Orbital Showcase: Product Switcher & Live Specs -->
+            <div class="lg:col-span-4 flex flex-col gap-4">
+              <div class="text-left">
+                <span class="text-xs font-tech uppercase tracking-widest text-solvo-gold">Arquitetura de Hardware</span>
+                <h3 class="font-monumental text-xl font-bold text-white mt-1">Vitrine Tecnológica</h3>
+                <p class="text-xs text-slate-400 mt-1">Selecione um componente para inspecionar no palco 3D:</p>
+              </div>
+
+              <!-- Product Selector Tabs -->
+              <div class="grid grid-cols-2 gap-2" id="product-switcher">
+                <button data-product="panel" class="product-btn active text-left p-3 rounded-xl border border-solvo-amber/60 bg-solvo-amber/10 transition-all duration-200">
+                  <div class="flex items-center justify-between">
+                    <i class="fa-solid fa-solar-panel text-solvo-gold text-sm"></i>
+                    <span class="text-[9px] font-tech px-1.5 py-0.5 rounded bg-solvo-amber/20 text-solvo-gold">670W</span>
+                  </div>
+                  <div class="font-tech text-xs font-bold text-white mt-2">Módulo N-Type</div>
+                  <div class="text-[10px] text-slate-400">Bifacial Ultra</div>
+                </button>
+
+                <button data-product="storage" class="product-btn text-left p-3 rounded-xl border border-white/10 bg-solvo-900/60 hover:border-white/30 transition-all duration-200">
+                  <div class="flex items-center justify-between">
+                    <i class="fa-solid fa-car-battery text-solvo-emerald text-sm"></i>
+                    <span class="text-[9px] font-tech px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">15kWh</span>
+                  </div>
+                  <div class="font-tech text-xs font-bold text-white mt-2">Solvo Storage</div>
+                  <div class="text-[10px] text-slate-400">LiFePO4 Backup</div>
+                </button>
+
+                <button data-product="inverter" class="product-btn text-left p-3 rounded-xl border border-white/10 bg-solvo-900/60 hover:border-white/30 transition-all duration-200">
+                  <div class="flex items-center justify-between">
+                    <i class="fa-solid fa-microchip text-solvo-cyan text-sm"></i>
+                    <span class="text-[9px] font-tech px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300">99.2%</span>
+                  </div>
+                  <div class="font-tech text-xs font-bold text-white mt-2">Smart Inverter</div>
+                  <div class="text-[10px] text-slate-400">Híbrido com IA</div>
+                </button>
+
+                <button data-product="ev" class="product-btn text-left p-3 rounded-xl border border-white/10 bg-solvo-900/60 hover:border-white/30 transition-all duration-200">
+                  <div class="flex items-center justify-between">
+                    <i class="fa-solid fa-charging-station text-purple-400 text-sm"></i>
+                    <span class="text-[9px] font-tech px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300">22kW</span>
+                  </div>
+                  <div class="font-tech text-xs font-bold text-white mt-2">Solvo Wallbox</div>
+                  <div class="text-[10px] text-slate-400">Recarga Solar EV</div>
+                </button>
+              </div>
+
+              <!-- Mini-Cards com Especificações Orbitais -->
+              <div class="flex flex-col gap-2.5 mt-1" id="product-specs-container">
+                <div class="glass-pill p-3 rounded-xl flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-solvo-amber/10 flex items-center justify-center text-solvo-gold">
+                      <i class="fa-solid fa-gauge-high text-xs"></i>
+                    </div>
+                    <div>
+                      <div class="text-[11px] text-slate-400">Eficiência Fotovoltaica</div>
+                      <div class="font-tech text-sm font-bold text-white" id="spec-1">23.8% N-Type TOPCon</div>
+                    </div>
+                  </div>
+                  <span class="text-[10px] font-tech text-emerald-400">+18% vs P-Type</span>
+                </div>
+
+                <div class="glass-pill p-3 rounded-xl flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-solvo-emerald/10 flex items-center justify-center text-solvo-emerald">
+                      <i class="fa-solid fa-shield-halved text-xs"></i>
+                    </div>
+                    <div>
+                      <div class="text-[11px] text-slate-400">Garantia Linear Solvo</div>
+                      <div class="font-tech text-sm font-bold text-white" id="spec-2">25 Anos de Potência</div>
+                    </div>
+                  </div>
+                  <span class="text-[10px] font-tech text-solvo-gold">Apolice Suíça</span>
+                </div>
+
+                <div class="glass-pill p-3 rounded-xl flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+                      <i class="fa-solid fa-wifi text-xs"></i>
+                    </div>
+                    <div>
+                      <div class="text-[11px] text-slate-400">Telemetria & App</div>
+                      <div class="font-tech text-sm font-bold text-white" id="spec-3">Monitoramento 24/7 IoT</div>
+                    </div>
+                  </div>
+                  <span class="text-[10px] font-tech text-slate-400">Nuvem 5G</span>
+                </div>
+              </div>
+
+              <!-- Quick CTA to direct checkout -->
+              <a href="#simulador" class="w-full text-center py-3 rounded-xl font-tech text-xs tracking-wider uppercase font-bold text-white bg-solvo-800 hover:bg-solvo-700 border border-white/10 hover:border-solvo-amber/50 transition-all duration-300 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-sliders text-solvo-gold"></i>
+                Calcular Retorno Deste Sistema
+              </a>
+
+            </div>
+
+          </div>
+
+          <!-- Rodapé Discreto da Hero: Selo de Premiação -->
+          <div class="mt-8 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs font-tech text-slate-400">
+            <div class="flex items-center gap-2 text-solvo-gold">
+              <i class="fa-solid fa-trophy text-sm"></i>
+              <span class="tracking-widest uppercase font-semibold">DESIGN AWARDS • PREMIUM SELECTION 2026</span>
+            </div>
+            <div class="flex items-center gap-6">
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-check-double text-emerald-400"></i> Certificação INMETRO A</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-award text-solvo-amber"></i> Tier 1 BloombergNEF</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-leaf text-emerald-400"></i> Zero Carbon Footprint</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. SEÇÃO DE MÉTRICAS COM CONTADORES NUMÉRICOS ANIMADOS -->
+    <section id="metricas" class="py-20 relative border-y border-white/10 bg-solvo-900/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="font-tech text-xs uppercase tracking-widest text-solvo-gold">Performance Comprovada</span>
+          <h2 class="font-monumental text-2xl sm:text-4xl font-extrabold uppercase text-white mt-2">
+            Resultados Mensuráveis em Escala
+          </h2>
+          <p class="text-slate-400 text-sm mt-3">
+            Nossos números refletem solidez de engenharia, viabilidade financeira e compromisso ecológico com o ecossistema brasileiro.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Card Métrica 1 -->
+          <div class="glass-card-interactive p-6 rounded-2xl relative overflow-hidden group">
+            <div class="w-12 h-12 rounded-xl bg-solvo-amber/10 border border-solvo-amber/20 flex items-center justify-center text-solvo-gold text-lg mb-4">
+              <i class="fa-solid fa-percent"></i>
+            </div>
+            <div class="flex items-baseline gap-1">
+              <span class="font-monumental text-4xl sm:text-5xl font-black text-white tracking-tight counter-number" data-target="95">0</span>
+              <span class="font-monumental text-3xl font-bold text-solvo-gold">%</span>
+            </div>
+            <h3 class="font-tech text-sm uppercase tracking-wider text-slate-200 mt-2 font-semibold">Redução Máxima na Conta</h3>
+            <p class="text-xs text-slate-400 mt-1">Economia imediata no primeiro ciclo de faturamento pós-ligação da usina.</p>
+          </div>
+
+          <!-- Card Métrica 2 -->
+          <div class="glass-card-interactive p-6 rounded-2xl relative overflow-hidden group">
+            <div class="w-12 h-12 rounded-xl bg-solvo-emerald/10 border border-solvo-emerald/20 flex items-center justify-center text-solvo-emerald text-lg mb-4">
+              <i class="fa-solid fa-solar-panel"></i>
+            </div>
+            <div class="flex items-baseline gap-1">
+              <span class="font-monumental text-4xl sm:text-5xl font-black text-white tracking-tight counter-number" data-target="4850">0</span>
+              <span class="font-monumental text-3xl font-bold text-solvo-emerald">+</span>
+            </div>
+            <h3 class="font-tech text-sm uppercase tracking-wider text-slate-200 mt-2 font-semibold">Usinas Conectadas</h3>
+            <p class="text-xs text-slate-400 mt-1">Projetos residenciais, agropecuários e industriais em 18 estados.</p>
+          </div>
+
+          <!-- Card Métrica 3 -->
+          <div class="glass-card-interactive p-6 rounded-2xl relative overflow-hidden group">
+            <div class="w-12 h-12 rounded-xl bg-solvo-cyan/10 border border-solvo-cyan/20 flex items-center justify-center text-solvo-cyan text-lg mb-4">
+              <i class="fa-solid fa-sack-dollar"></i>
+            </div>
+            <div class="flex items-baseline gap-1">
+              <span class="font-monumental text-2xl font-bold text-slate-400">R$</span>
+              <span class="font-monumental text-4xl sm:text-5xl font-black text-white tracking-tight counter-number" data-target="48">0</span>
+              <span class="font-monumental text-3xl font-bold text-solvo-cyan">M+</span>
+            </div>
+            <h3 class="font-tech text-sm uppercase tracking-wider text-slate-200 mt-2 font-semibold">Economizados em Tarifas</h3>
+            <p class="text-xs text-slate-400 mt-1">Capital retido pelos clientes que deixou de ser pago às concessionárias.</p>
+          </div>
+
+          <!-- Card Métrica 4 -->
+          <div class="glass-card-interactive p-6 rounded-2xl relative overflow-hidden group">
+            <div class="w-12 h-12 rounded-xl bg-solvo-gold/10 border border-solvo-gold/20 flex items-center justify-center text-solvo-gold text-lg mb-4">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="flex items-baseline gap-1">
+              <span class="font-monumental text-4xl sm:text-5xl font-black text-white tracking-tight counter-number" data-target="25">0</span>
+              <span class="font-monumental text-2xl font-bold text-solvo-gold">Anos</span>
+            </div>
+            <h3 class="font-tech text-sm uppercase tracking-wider text-slate-200 mt-2 font-semibold">Garantia Linear de Geração</h3>
+            <p class="text-xs text-slate-400 mt-1">Garantia contratual de retenção de pelo menos 87.4% da capacidade após 25 anos.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. GRID DE SOLUÇÕES & SERVIÇOS EM GLASSMORPHISM -->
+    <section id="solucoes" class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-solvo-800 text-xs font-tech text-solvo-gold mb-3">
+              <i class="fa-solid fa-diagram-project"></i> ENGENHARIA CUSTOMIZADA
+            </div>
+            <h2 class="font-monumental text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase text-white">
+              Soluções Energéticas de <br class="hidden sm:inline" />
+              <span class="solar-gradient-text">Alta Eficiência</span>
+            </h2>
+          </div>
+          <p class="text-slate-400 text-sm max-w-md">
+            Do projeto executivo fotogramétrico com drones à homologação completa junto à concessionária, entregamos arquiteturas completas chave-na-mão.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Solução 1: Residencial Premium -->
+          <div class="glass-card-interactive p-8 rounded-3xl flex flex-col justify-between group">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-solvo-amber/20 to-transparent border border-solvo-amber/30 flex items-center justify-center text-solvo-gold text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-house-chimney-window"></i>
+              </div>
+              <span class="font-tech text-[11px] uppercase tracking-widest text-solvo-gold">Alta Fidelidade Arquitetônica</span>
+              <h3 class="font-monumental text-xl font-bold text-white mt-1 mb-3">Residencial High-End</h3>
+              <p class="text-slate-300/80 text-xs leading-relaxed mb-6">
+                Painéis Full-Black com integração arquitetônica de luxo. Zero impacto na estética do telhado, zero ruído e valorização imobiliária imediata de até 15%.
+              </p>
+            </div>
+            <div>
+              <div class="border-t border-white/10 pt-4 flex items-center justify-between text-xs font-tech text-slate-400">
+                <span>Retorno Médio:</span>
+                <strong class="text-solvo-gold">2.8 a 3.4 anos</strong>
+              </div>
+              <a href="#simulador" class="mt-4 w-full py-2.5 rounded-xl bg-white/5 hover:bg-solvo-amber/20 hover:text-solvo-gold border border-white/10 text-center font-tech text-xs tracking-wider uppercase transition-colors flex items-center justify-center gap-2">
+                Configurar Residencial <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Solução 2: Comercial & Corporativo -->
+          <div class="glass-card-interactive p-8 rounded-3xl flex flex-col justify-between group border-solvo-amber/30">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-solvo-emerald/20 to-transparent border border-solvo-emerald/30 flex items-center justify-center text-solvo-emerald text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-building-wheat"></i>
+              </div>
+              <span class="font-tech text-[11px] uppercase tracking-widest text-solvo-emerald">Redução Direta de OPEX</span>
+              <h3 class="font-monumental text-xl font-bold text-white mt-1 mb-3">Comercial & PMEs</h3>
+              <p class="text-slate-300/80 text-xs leading-relaxed mb-6">
+                Otimização contábil para supermercados, galpões, clínicas, hospitais e escritórios. Eliminação das variações de bandeiras tarifárias e aumento de margem líquida.
+              </p>
+            </div>
+            <div>
+              <div class="border-t border-white/10 pt-4 flex items-center justify-between text-xs font-tech text-slate-400">
+                <span>Redução em OPEX:</span>
+                <strong class="text-solvo-emerald">Até R$ 180k/ano</strong>
+              </div>
+              <a href="#simulador" class="mt-4 w-full py-2.5 rounded-xl bg-white/5 hover:bg-solvo-emerald/20 hover:text-solvo-emerald border border-white/10 text-center font-tech text-xs tracking-wider uppercase transition-colors flex items-center justify-center gap-2">
+                Configurar Corporativo <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Solução 3: Agro & Usinas de Solo -->
+          <div class="glass-card-interactive p-8 rounded-3xl flex flex-col justify-between group">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-solvo-cyan/20 to-transparent border border-solvo-cyan/30 flex items-center justify-center text-solvo-cyan text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-wheat-awn"></i>
+              </div>
+              <span class="font-tech text-[11px] uppercase tracking-widest text-solvo-cyan">Agronegócio & Geração Distribuída</span>
+              <h3 class="font-monumental text-xl font-bold text-white mt-1 mb-3">Usinas de Solo & Agro</h3>
+              <p class="text-slate-300/80 text-xs leading-relaxed mb-6">
+                Eletrificação de pivôs centrais de irrigação, granjas, secadores e usinas de investimento para locação e autoconsumo remoto com estrutura tracker ou fixa.
+              </p>
+            </div>
+            <div>
+              <div class="border-t border-white/10 pt-4 flex items-center justify-between text-xs font-tech text-slate-400">
+                <span>Escala Mínima:</span>
+                <strong class="text-solvo-cyan">75 kWp a 5 MWp</strong>
+              </div>
+              <a href="#simulador" class="mt-4 w-full py-2.5 rounded-xl bg-white/5 hover:bg-solvo-cyan/20 hover:text-solvo-cyan border border-white/10 text-center font-tech text-xs tracking-wider uppercase transition-colors flex items-center justify-center gap-2">
+                Configurar Agro Solar <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Solução 4: Armazenamento com Baterias LiFePO4 -->
+          <div class="glass-card-interactive p-8 rounded-3xl flex flex-col justify-between group">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-transparent border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-battery-three-quarters"></i>
+              </div>
+              <span class="font-tech text-[11px] uppercase tracking-widest text-purple-400">Zero Blackout • Off-Grid & Híbrido</span>
+              <h3 class="font-monumental text-xl font-bold text-white mt-1 mb-3">Solvo BESS Storage</h3>
+              <p class="text-slate-300/80 text-xs leading-relaxed mb-6">
+                Banco de baterias de lítio LiFePO4 com comutação instantânea em menos de 10 milissegundos. Autonomia ininterrupta para servidores, maquinários e residências.
+              </p>
+            </div>
+            <div>
+              <div class="border-t border-white/10 pt-4 flex items-center justify-between text-xs font-tech text-slate-400">
+                <span>Tempo de Comutação:</span>
+                <strong class="text-purple-300">&lt; 10ms (Zero Queda)</strong>
+              </div>
+              <a href="#simulador" class="mt-4 w-full py-2.5 rounded-xl bg-white/5 hover:bg-purple-500/20 hover:text-purple-300 border border-white/10 text-center font-tech text-xs tracking-wider uppercase transition-colors flex items-center justify-center gap-2">
+                Configurar Storage <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. ENGENHARIA & DIFERENCIAIS SOLVO (COMPARATIVO TECNOLÓGICO) -->
+    <section id="diferenciais" class="py-20 bg-solvo-900/40 border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-5">
+            <span class="font-tech text-xs uppercase tracking-widest text-solvo-gold">Padrão de Engenharia</span>
+            <h2 class="font-monumental text-3xl sm:text-4xl font-extrabold uppercase text-white mt-2 leading-tight">
+              A Diferença Entre um Kit Solar e a <span class="solar-gradient-text">Engenharia Solvo</span>
+            </h2>
+            <p class="text-slate-300/90 text-sm mt-4 leading-relaxed">
+              Muitas empresas vendem kits genéricos que sofrem com superaquecimento, perda de rendimento por sombreamento parcial e burocracia interminável de homologação. Na Solvo, cada usina é projetada como um ativo de capital financeiro de alta rentabilidade.
+            </p>
+
+            <div class="mt-6 space-y-3">
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0 mt-0.5">
+                  <i class="fa-solid fa-check text-xs"></i>
+                </div>
+                <div class="text-xs text-slate-300">
+                  <strong class="text-white font-tech">Células N-Type TOPCon de 16 Busbars:</strong> 40% menor coeficiente de perda térmica em dias de calor escaldante.
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0 mt-0.5">
+                  <i class="fa-solid fa-check text-xs"></i>
+                </div>
+                <div class="text-xs text-slate-300">
+                  <strong class="text-white font-tech">Otimizadores de Potência com IA:</strong> Sombreamento em uma placa não reduz a performance do restante do arranjo.
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0 mt-0.5">
+                  <i class="fa-solid fa-check text-xs"></i>
+                </div>
+                <div class="text-xs text-slate-300">
+                  <strong class="text-white font-tech">Homologação Express Solvo:</strong> Tramitação direta com ART/RRT e aprovação na concessionária sem atrasos.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabela Comparativa Visual -->
+          <div class="lg:col-span-7">
+            <div class="rounded-3xl glass-card border border-white/10 p-6 sm:p-8 overflow-x-auto">
+              <table class="w-full text-left text-xs font-sans">
+                <thead>
+                  <tr class="border-b border-white/10 text-slate-400 font-tech uppercase text-[11px]">
+                    <th class="pb-4">Critério de Avaliação</th>
+                    <th class="pb-4 text-slate-500">Kits Convencionais</th>
+                    <th class="pb-4 text-solvo-gold">Padrão Solvo Energia</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5">
+                  <tr>
+                    <td class="py-4 font-semibold text-white">Tipo de Célula Fotovoltaica</td>
+                    <td class="py-4 text-slate-400">P-Type Perc Antigo (baixa eficiência)</td>
+                    <td class="py-4 font-bold text-solvo-emerald flex items-center gap-2">
+                      <i class="fa-solid fa-circle-check"></i> N-Type TOPCon Ultra Bifacial
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="py-4 font-semibold text-white">Degradação ao Longo do Tempo</td>
+                    <td class="py-4 text-slate-400">&gt; 0.8% a 1.2% ao ano</td>
+                    <td class="py-4 font-bold text-solvo-emerald flex items-center gap-2">
+                      <i class="fa-solid fa-circle-check"></i> Menos de 0.35% ao ano (L80 &gt; 35 anos)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="py-4 font-semibold text-white">Monitoramento de Rendimento</td>
+                    <td class="py-4 text-slate-400">Genérico, sem alerta de falhas</td>
+                    <td class="py-4 font-bold text-solvo-emerald flex items-center gap-2">
+                      <i class="fa-solid fa-circle-check"></i> Telemetria IoT por Módulo com IA
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="py-4 font-semibold text-white">Estruturas de Fixação</td>
+                    <td class="py-4 text-slate-400">Aço galvanizado comum com risco de oxidação</td>
+                    <td class="py-4 font-bold text-solvo-emerald flex items-center gap-2">
+                      <i class="fa-solid fa-circle-check"></i> Alumínio Anodizado 6063 T6 & Inox A2
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="py-4 font-semibold text-white">Garantia e Responsabilidade</td>
+                    <td class="py-4 text-slate-400">Repassada a distribuidores terceiros</td>
+                    <td class="py-4 font-bold text-solvo-emerald flex items-center gap-2">
+                      <i class="fa-solid fa-circle-check"></i> Garantia Integral Solvo Direta
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. SIMULADOR FINANCEIRO INTERATIVO & FORMULÁRIO DE CONVERSÃO DIRETA COM WHATSAPP -->
+    <section id="simulador" class="py-24 relative overflow-hidden">
+      <!-- Glow ambient -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-solvo-amber/10 rounded-full blur-[180px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-xs font-tech text-solvo-gold mb-3">
+            <i class="fa-solid fa-calculator"></i> SIMULAÇÃO EM TEMPO REAL
+          </div>
+          <h2 class="font-monumental text-3xl sm:text-5xl font-extrabold uppercase text-white">
+            Calcule o Retorno do Seu Investimento
+          </h2>
+          <p class="text-slate-300/80 text-sm sm:text-base mt-3">
+            Ajuste o valor médio da sua conta de energia e veja instantaneamente quanto seu patrimônio deixará de gastar com concessionárias nos próximos anos.
+          </p>
+        </div>
+
+        <!-- ATLAS SOLAR INTERATIVO DO BRASIL: RADIAÇÃO & POTENCIAL FOTOVOLTAICO REGIONAL -->
+        <div class="mb-12 glass-card p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden" id="atlas-solar-brasil">
+          <div class="absolute -top-24 -left-24 w-80 h-80 bg-solvo-amber/10 rounded-full blur-[100px] pointer-events-none"></div>
+          <div class="absolute -bottom-24 -right-24 w-80 h-80 bg-solvo-emerald/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+          <div class="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b border-white/10 pb-6">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-solvo-amber/10 border border-solvo-amber/20 text-xs font-tech text-solvo-gold mb-2">
+                <i class="fa-solid fa-map-location-dot"></i> ATLAS SOLAR DO BRASIL • DADOS OFICIAIS ANEEL & INPE
+              </div>
+              <h3 class="font-monumental text-2xl sm:text-3xl font-extrabold uppercase text-white">
+                Mapeamento de Radiação Solar por Região
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-300/80 mt-1 max-w-2xl leading-relaxed">
+                A irradiação solar no Brasil varia de 4.2 a mais de 6.0 HSP (Horas de Sol Pleno diárias). Clique ou passe o cursor sobre as macrorregiões no mapa térmico para inspecionar os índices locais e sincronizar o cálculo financeiro em tempo real.
+              </p>
+            </div>
+            
+            <!-- Legenda da Escala de Radiação -->
+            <div class="flex flex-col items-start md:items-end shrink-0 bg-solvo-900/60 px-4 py-2.5 rounded-xl border border-white/5">
+              <span class="text-[10px] font-tech text-slate-400 uppercase tracking-wider mb-1">Índice HSP Diário (kWh/m²/dia)</span>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-tech text-cyan-300 font-bold">4.2</span>
+                <div class="w-32 sm:w-44 h-2.5 rounded-full bg-gradient-to-r from-cyan-400 via-emerald-400 via-amber-400 to-solvo-gold shadow-sm"></div>
+                <span class="text-[10px] font-tech text-solvo-gold font-bold">6.0+ HSP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grid: SVG Map on Left + Telemetry Detail Card on Right -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            
+            <!-- SVG Map of Brazil -->
+            <div class="lg:col-span-7 flex flex-col items-center justify-center relative bg-solvo-950/70 rounded-2xl border border-white/5 p-4 sm:p-6 overflow-hidden">
+              <div class="w-full flex items-center justify-between text-xs font-tech text-slate-400 mb-2">
+                <span class="flex items-center gap-2 text-solvo-gold">
+                  <i class="fa-solid fa-hand-pointer text-xs"></i>
+                  <span>Clique em uma região para selecionar</span>
+                </span>
+                <span class="text-[11px] text-emerald-400 flex items-center gap-1.5">
+                  <i class="fa-solid fa-satellite-dish"></i> Telemetria Ativa
+                </span>
+              </div>
+
+              <!-- Vector SVG Map of Brazil -->
+              <svg viewBox="0 0 540 520" class="w-full max-w-[480px] h-auto drop-shadow-2xl select-none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <!-- Filter for glowing highlight on active/hovered region -->
+                  <filter id="solar-map-glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="6" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+
+                  <!-- Linear Gradients for Heatmap Regions -->
+                  <linearGradient id="grad-nordeste" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.88" />
+                    <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.98" />
+                  </linearGradient>
+
+                  <linearGradient id="grad-centro-oeste" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.78" />
+                    <stop offset="100%" stop-color="#d97706" stop-opacity="0.88" />
+                  </linearGradient>
+
+                  <linearGradient id="grad-sudeste" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#10b981" stop-opacity="0.78" />
+                    <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.85" />
+                  </linearGradient>
+
+                  <linearGradient id="grad-sul" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.75" />
+                    <stop offset="100%" stop-color="#059669" stop-opacity="0.85" />
+                  </linearGradient>
+
+                  <linearGradient id="grad-norte" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#047857" stop-opacity="0.7" />
+                    <stop offset="100%" stop-color="#10b981" stop-opacity="0.8" />
+                  </linearGradient>
+                </defs>
+
+                <!-- Region 1: Norte -->
+                <path id="map-norte" class="brazil-region transition-all duration-300"
+                  d="M 65,160 C 45,145 35,165 20,175 C 10,190 25,210 50,215 C 65,225 80,220 95,235 C 105,245 115,250 135,250 C 150,250 165,240 180,235 C 195,230 205,215 215,220 C 230,230 245,248 260,245 C 275,240 288,225 285,200 C 290,178 305,165 310,148 C 315,130 300,120 290,110 C 270,90 275,60 255,48 C 238,38 218,58 198,48 C 182,38 162,28 145,42 C 128,52 112,68 92,92 C 78,118 82,142 65,160 Z"
+                  fill="url(#grad-norte)" stroke="#10b981" stroke-width="1.8" data-region="norte" />
+
+                <!-- Region 2: Nordeste (Initial Active) -->
+                <path id="map-nordeste" class="brazil-region active-region transition-all duration-300"
+                  d="M 290,110 C 305,105 325,95 350,95 C 380,95 410,100 430,115 C 450,130 475,145 480,160 C 480,175 465,190 455,205 C 445,220 430,240 410,255 C 390,265 375,260 360,255 C 345,250 335,235 325,235 C 310,235 300,250 288,245 C 278,230 285,200 290,178 C 290,150 295,130 290,110 Z"
+                  fill="url(#grad-nordeste)" stroke="#fbbf24" stroke-width="2.6" data-region="nordeste" />
+
+                <!-- Region 3: Centro-Oeste -->
+                <path id="map-centro-oeste" class="brazil-region transition-all duration-300"
+                  d="M 135,250 C 155,250 175,240 200,230 C 220,225 240,240 260,245 C 280,250 290,250 300,255 C 310,265 315,285 310,305 C 305,325 295,345 285,360 C 275,370 255,375 240,370 C 225,365 215,350 200,345 C 185,340 170,350 160,345 C 145,335 140,315 145,295 C 150,280 145,265 135,250 Z"
+                  fill="url(#grad-centro-oeste)" stroke="#f59e0b" stroke-width="1.8" data-region="centro-oeste" />
+
+                <!-- Region 4: Sudeste -->
+                <path id="map-sudeste" class="brazil-region transition-all duration-300"
+                  d="M 300,255 C 320,250 340,250 360,260 C 380,270 395,285 405,305 C 415,325 420,345 410,365 C 400,385 380,400 360,405 C 340,410 320,405 305,395 C 290,385 280,375 275,365 C 285,345 300,325 310,305 C 310,285 305,265 300,255 Z"
+                  fill="url(#grad-sudeste)" stroke="#10b981" stroke-width="1.8" data-region="sudeste" />
+
+                <!-- Region 5: Sul -->
+                <path id="map-sul" class="brazil-region transition-all duration-300"
+                  d="M 275,365 C 290,375 305,385 320,395 C 330,405 325,420 315,435 C 305,450 295,470 280,490 C 265,495 255,485 245,470 C 235,455 240,435 245,420 C 250,405 255,390 265,380 C 270,373 273,369 275,365 Z"
+                  fill="url(#grad-sul)" stroke="#06b6d4" stroke-width="1.8" data-region="sul" />
+
+                <!-- Region Text Badges on Map -->
+                <text x="382" y="180" fill="#ffffff" font-family="'Space Grotesk', monospace" font-size="12" font-weight="bold" text-anchor="middle" pointer-events="none" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.8))">NORDESTE</text>
+                <text x="382" y="196" fill="#fbbf24" font-family="'Space Grotesk', monospace" font-size="10" font-weight="600" text-anchor="middle" pointer-events="none">5.6 HSP</text>
+
+                <text x="225" y="300" fill="#ffffff" font-family="'Space Grotesk', monospace" font-size="11" font-weight="bold" text-anchor="middle" pointer-events="none" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.8))">CENTRO-OESTE</text>
+                <text x="225" y="315" fill="#fde047" font-family="'Space Grotesk', monospace" font-size="10" font-weight="600" text-anchor="middle" pointer-events="none">5.2 HSP</text>
+
+                <text x="350" y="340" fill="#ffffff" font-family="'Space Grotesk', monospace" font-size="11" font-weight="bold" text-anchor="middle" pointer-events="none" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.8))">SUDESTE</text>
+                <text x="350" y="355" fill="#34d399" font-family="'Space Grotesk', monospace" font-size="10" font-weight="600" text-anchor="middle" pointer-events="none">4.8 HSP</text>
+
+                <text x="280" y="440" fill="#ffffff" font-family="'Space Grotesk', monospace" font-size="11" font-weight="bold" text-anchor="middle" pointer-events="none" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.8))">SUL</text>
+                <text x="280" y="455" fill="#38bdf8" font-family="'Space Grotesk', monospace" font-size="10" font-weight="600" text-anchor="middle" pointer-events="none">4.4 HSP</text>
+
+                <text x="160" y="145" fill="#ffffff" font-family="'Space Grotesk', monospace" font-size="12" font-weight="bold" text-anchor="middle" pointer-events="none" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.8))">NORTE</text>
+                <text x="160" y="160" fill="#6ee7b7" font-family="'Space Grotesk', monospace" font-size="10" font-weight="600" text-anchor="middle" pointer-events="none">4.6 HSP</text>
+
+                <!-- Pulsing Solar Hub Pins -->
+                <g class="solar-pin cursor-pointer" transform="translate(390, 160)">
+                  <circle r="9" fill="#fbbf24" opacity="0.4" class="map-ping" />
+                  <circle r="4.5" fill="#fbbf24" stroke="#040711" stroke-width="1.5" />
+                </g>
+                <g class="solar-pin cursor-pointer" transform="translate(340, 310)">
+                  <circle r="8" fill="#f59e0b" opacity="0.4" class="map-ping" />
+                  <circle r="4" fill="#f59e0b" stroke="#040711" stroke-width="1.5" />
+                </g>
+                <g class="solar-pin cursor-pointer" transform="translate(245, 290)">
+                  <circle r="8" fill="#fbbf24" opacity="0.4" class="map-ping" />
+                  <circle r="4" fill="#fbbf24" stroke="#040711" stroke-width="1.5" />
+                </g>
+                <g class="solar-pin cursor-pointer" transform="translate(285, 410)">
+                  <circle r="7" fill="#06b6d4" opacity="0.4" class="map-ping" />
+                  <circle r="3.5" fill="#06b6d4" stroke="#040711" stroke-width="1.5" />
+                </g>
+              </svg>
+
+              <!-- Quick Legend Pills -->
+              <div class="mt-4 flex flex-wrap items-center justify-center gap-2 text-[11px] font-tech text-slate-300">
+                <button type="button" class="region-pill-btn active px-3 py-1 rounded-full bg-solvo-amber/20 border border-solvo-amber/40 text-solvo-gold hover:bg-solvo-amber/30 transition-colors" data-region="nordeste">
+                  Nordeste (5.6)
+                </button>
+                <button type="button" class="region-pill-btn px-3 py-1 rounded-full bg-solvo-900 border border-white/10 text-slate-300 hover:text-white hover:border-solvo-amber/40 transition-colors" data-region="centro-oeste">
+                  Centro-Oeste (5.2)
+                </button>
+                <button type="button" class="region-pill-btn px-3 py-1 rounded-full bg-solvo-900 border border-white/10 text-slate-300 hover:text-white hover:border-solvo-amber/40 transition-colors" data-region="sudeste">
+                  Sudeste (4.8)
+                </button>
+                <button type="button" class="region-pill-btn px-3 py-1 rounded-full bg-solvo-900 border border-white/10 text-slate-300 hover:text-white hover:border-solvo-amber/40 transition-colors" data-region="sul">
+                  Sul (4.4)
+                </button>
+                <button type="button" class="region-pill-btn px-3 py-1 rounded-full bg-solvo-900 border border-white/10 text-slate-300 hover:text-white hover:border-solvo-amber/40 transition-colors" data-region="norte">
+                  Norte (4.6)
+                </button>
+              </div>
+            </div>
+
+            <!-- Right: Telemetria Regional & Impacto na Economia -->
+            <div class="lg:col-span-5 flex flex-col gap-4">
+              <div class="glass-pill p-6 rounded-2xl border border-solvo-amber/30 relative overflow-hidden shadow-solar-glow/10" id="region-telemetry-card">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="px-3 py-1 rounded-md text-[10px] font-tech uppercase tracking-wider font-bold bg-solvo-amber/20 text-solvo-gold border border-solvo-amber/30" id="map-region-tag">
+                    Região Nordeste • Cinturão Solar
+                  </span>
+                  <span class="text-xs font-tech text-emerald-400 flex items-center gap-1.5 font-semibold">
+                    <i class="fa-solid fa-circle-check"></i> <span id="map-region-rank">Top 1 Brasil</span>
+                  </span>
+                </div>
+
+                <div class="flex items-baseline gap-2 mb-1">
+                  <span class="font-monumental text-4xl sm:text-5xl font-black text-white" id="map-region-hsp">5.6</span>
+                  <span class="font-tech text-sm text-solvo-gold font-bold">HSP (kWh/m²/dia)</span>
+                </div>
+                <div class="text-xs text-slate-400 mb-5" id="map-region-annual">
+                  Equivalente a <strong class="text-white">2.044 kWh/m²</strong> de energia solar incidente por ano.
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 border-t border-white/10 pt-4 mb-4 text-xs font-tech">
+                  <div class="p-3 rounded-xl bg-solvo-900/80 border border-white/5">
+                    <div class="text-[10px] text-slate-400">Geração Específica</div>
+                    <div class="font-bold text-white text-sm mt-0.5" id="map-region-kwh-kwp">1.680 kWh/kWp/ano</div>
+                    <div class="text-[10px] text-emerald-400 mt-0.5">+24% vs média sul</div>
+                  </div>
+                  <div class="p-3 rounded-xl bg-solvo-900/80 border border-white/5">
+                    <div class="text-[10px] text-slate-400">Tempo de Payback</div>
+                    <div class="font-bold text-solvo-gold text-sm mt-0.5" id="map-region-payback">2.5 a 2.8 Anos</div>
+                    <div class="text-[10px] text-slate-400 mt-0.5">Amortização veloz</div>
+                  </div>
+                </div>
+
+                <p class="text-xs text-slate-300 leading-relaxed mb-4" id="map-region-desc">
+                  O semiárido nordestino e o Vale do São Francisco registram os maiores índices de irradiação solar da América do Sul, gerando até 24% mais energia por placa instalada.
+                </p>
+
+                <div class="text-xs font-tech text-slate-400 mb-5 p-2.5 rounded-xl bg-solvo-950/70 border border-white/5">
+                  <span class="text-slate-400">Estados Principais: </span>
+                  <strong class="text-white font-semibold" id="map-region-states">BA, CE, PE, PI, RN, PB, MA, AL, SE</strong>
+                </div>
+
+                <button id="apply-region-btn" type="button" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-solvo-gold to-solvo-amber hover:from-solvo-glow hover:to-solvo-gold text-solvo-950 font-tech font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-solar-glow transition-all hover:scale-[1.02] cursor-pointer">
+                  <i class="fa-solid fa-calculator text-xs"></i>
+                  <span>Calcular Economia Desta Região</span>
+                </button>
+              </div>
+
+              <!-- Quick Insight Bar -->
+              <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-solvo-900/50 border border-white/5 text-xs text-slate-400">
+                <i class="fa-solid fa-circle-info text-solvo-gold text-sm shrink-0"></i>
+                <span>A radiação solar de cada estado altera a quantidade necessária de módulos N-Type e a velocidade de retorno financeiro.</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Lado Esquerdo: Controles Interativos da Simulação -->
+          <div id="step-1-params" class="lg:col-span-7 glass-card p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl transition-all duration-300">
+            
+            <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+              <span class="font-tech text-xs uppercase tracking-wider text-slate-300">
+                Passo 1: Parâmetros de Consumo
+              </span>
+              <span class="text-xs font-tech text-solvo-gold flex items-center gap-1.5">
+                <i class="fa-solid fa-bolt"></i> Tarifa Regulada 2026
+              </span>
+            </div>
+
+            <!-- Slider de Valor da Fatura -->
+            <div class="mb-8">
+              <div class="flex items-center justify-between mb-2">
+                <label for="bill-slider" class="text-xs font-tech uppercase text-slate-300 font-semibold">
+                  Valor Médio Mensal da Conta de Luz:
+                </label>
+                <div class="flex items-center gap-1 bg-solvo-950 px-4 py-2 rounded-xl border border-solvo-gold/40">
+                  <span class="text-xs text-solvo-gold font-tech">R$</span>
+                  <input type="number" id="bill-input" min="300" max="50000" step="50" value="1800" class="w-24 bg-transparent text-white font-monumental text-lg font-bold text-right outline-none" />
+                </div>
+              </div>
+
+              <input type="range" id="bill-slider" min="300" max="30000" step="50" value="1800" class="w-full cursor-pointer mt-3" />
+              
+              <div class="flex justify-between text-[11px] font-tech text-slate-500 mt-2">
+                <span>R$ 300</span>
+                <span>R$ 5.000</span>
+                <span>R$ 15.000</span>
+                <span>R$ 30.000+</span>
+              </div>
+            </div>
+
+            <!-- Seletores de Perfil & Localização -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div>
+                <label class="block text-xs font-tech uppercase text-slate-300 mb-2">Tipo de Imóvel / Conexão:</label>
+                <select id="property-type" class="w-full bg-solvo-950 border border-white/10 rounded-xl px-4 py-3 text-xs font-tech text-white outline-none focus:border-solvo-gold transition-colors">
+                  <option value="residencial">Residencial (Monofásico / Bifásico)</option>
+                  <option value="comercial">Comercial / Empresarial (Trifásico)</option>
+                  <option value="industrial">Industrial / Média Tensão (Grupo A)</option>
+                  <option value="rural">Agropecuário / Irrigação Rural</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-tech uppercase text-slate-300 mb-2">Região / Estado (Irradiação Solar):</label>
+                <select id="state-select" class="w-full bg-solvo-950 border border-white/10 rounded-xl px-4 py-3 text-xs font-tech text-white outline-none focus:border-solvo-gold transition-colors">
+                  <option value="BA" data-sun="5.6" data-region="nordeste">Bahia / Nordeste (BA) • 5.6 HSP (Top 1)</option>
+                  <option value="CE" data-sun="5.6" data-region="nordeste">Ceará / Nordeste (CE) • 5.6 HSP</option>
+                  <option value="MG" data-sun="5.2" data-region="sudeste">Minas Gerais (MG) • 5.2 HSP</option>
+                  <option value="SP" data-sun="4.6" data-region="sudeste">São Paulo (SP) • 4.6 HSP</option>
+                  <option value="RJ" data-sun="4.8" data-region="sudeste">Rio de Janeiro (RJ) • 4.8 HSP</option>
+                  <option value="GO" data-sun="5.2" data-region="centro-oeste">Goiás / Brasília (GO/DF) • 5.2 HSP</option>
+                  <option value="MT" data-sun="5.3" data-region="centro-oeste">Mato Grosso (MT) • 5.3 HSP</option>
+                  <option value="PA" data-sun="4.6" data-region="norte">Pará / Norte (PA) • 4.6 HSP</option>
+                  <option value="PR" data-sun="4.5" data-region="sul">Paraná (PR) • 4.5 HSP</option>
+                  <option value="RS" data-sun="4.4" data-region="sul">Rio Grande do Sul (RS) • 4.4 HSP</option>
+                  <option value="SC" data-sun="4.3" data-region="sul">Santa Catarina (SC) • 4.3 HSP</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Resumo Financeiro Dinâmico dos Resultados -->
+            <div class="rounded-2xl bg-solvo-950/80 border border-white/10 p-5">
+              <div class="text-xs font-tech uppercase tracking-wider text-solvo-gold mb-4 flex items-center justify-between">
+                <span>Resultado Estimado da Sua Usina</span>
+                <span class="text-emerald-400"><i class="fa-solid fa-arrow-trend-up"></i> Retorno Garantido</span>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div class="p-3 rounded-xl bg-white/5">
+                  <div class="text-[11px] text-slate-400">Economia no 1º Ano</div>
+                  <div class="font-monumental text-xl sm:text-2xl font-bold text-white mt-1" id="res-1year">R$ 20.520</div>
+                  <div class="text-[10px] text-emerald-400 mt-0.5">R$ <span id="res-monthly">1.710</span>/mês</div>
+                </div>
+
+                <div class="p-3 rounded-xl bg-white/5">
+                  <div class="text-[11px] text-slate-400">Economia em 5 Anos</div>
+                  <div class="font-monumental text-xl sm:text-2xl font-bold text-solvo-gold mt-1" id="res-5years">R$ 117.990</div>
+                  <div class="text-[10px] text-slate-400 mt-0.5">C/ inflação energética</div>
+                </div>
+
+                <div class="p-3 rounded-xl bg-white/5 col-span-2 sm:col-span-1">
+                  <div class="text-[11px] text-slate-400">Acúmulo em 25 Anos</div>
+                  <div class="font-monumental text-xl sm:text-2xl font-bold text-solvo-emerald mt-1" id="res-25years">R$ 745.000</div>
+                  <div class="text-[10px] text-emerald-400 mt-0.5">Patrimônio protegido</div>
+                </div>
+              </div>
+
+              <div class="mt-4 pt-4 border-t border-white/5 grid grid-cols-3 gap-2 text-center text-xs font-tech">
+                <div>
+                  <div class="text-[10px] text-slate-400">Potência Estimada</div>
+                  <div class="font-bold text-white mt-0.5" id="res-power">14.7 kWp</div>
+                </div>
+                <div>
+                  <div class="text-[10px] text-slate-400">Módulos N-Type</div>
+                  <div class="font-bold text-white mt-0.5" id="res-panels">22 Placas</div>
+                </div>
+                <div>
+                  <div class="text-[10px] text-slate-400">Payback Médio</div>
+                  <div class="font-bold text-solvo-gold mt-0.5" id="res-payback">3.1 Anos</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Lado Direito: Formulário de Conversão Direta com WhatsApp -->
+          <div class="lg:col-span-5 glass-card p-6 sm:p-8 rounded-3xl border border-solvo-amber/30 shadow-solar-glow/20 relative">
+            
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-tech mb-4">
+              <i class="fa-solid fa-lock text-xs"></i> ESTUDO DE ENGENHARIA 100% GRATUITO
+            </div>
+
+            <h3 class="font-monumental text-2xl font-bold text-white">Receba Sua Proposta VIP</h3>
+            <p class="text-xs text-slate-300 mt-1 mb-6">
+              Nossos engenheiros emitirão a simulação com irradiação por satélite e o plano financeiro completo direto no seu WhatsApp.
+            </p>
+
+            <form id="solar-lead-form" class="space-y-4">
+              <div>
+                <label for="lead-name" class="block text-xs font-tech uppercase text-slate-300 mb-1">Nome Completo:</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                    <i class="fa-solid fa-user text-xs"></i>
+                  </div>
+                  <input type="text" id="lead-name" required placeholder="Ex: Roberto Silveira" class="w-full bg-solvo-950 border border-white/15 rounded-xl pl-10 pr-4 py-3 text-xs font-tech text-white placeholder-slate-500 outline-none focus:border-solvo-gold transition-colors" />
+                </div>
+              </div>
+
+              <div>
+                <label for="lead-phone" class="block text-xs font-tech uppercase text-slate-300 mb-1">WhatsApp / Telefone:</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                    <i class="fa-brands fa-whatsapp text-sm text-emerald-400"></i>
+                  </div>
+                  <input type="tel" id="lead-phone" required placeholder="(11) 99999-9999" maxlength="15" class="w-full bg-solvo-950 border border-white/15 rounded-xl pl-10 pr-4 py-3 text-xs font-tech text-white placeholder-slate-500 outline-none focus:border-solvo-gold transition-colors" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label for="lead-city" class="block text-xs font-tech uppercase text-slate-300 mb-1">Cidade / Bairro:</label>
+                  <input type="text" id="lead-city" required placeholder="Ex: Campinas / SP" class="w-full bg-solvo-950 border border-white/15 rounded-xl px-4 py-3 text-xs font-tech text-white placeholder-slate-500 outline-none focus:border-solvo-gold transition-colors" />
+                </div>
+                <div>
+                  <label for="lead-utility" class="block text-xs font-tech uppercase text-slate-300 mb-1">Concessionária:</label>
+                  <input type="text" id="lead-utility" placeholder="Ex: CPFL / Enel / Cemig" class="w-full bg-solvo-950 border border-white/15 rounded-xl px-4 py-3 text-xs font-tech text-white placeholder-slate-500 outline-none focus:border-solvo-gold transition-colors" />
+                </div>
+              </div>
+
+              <!-- Termos & Privacidade -->
+              <div class="flex items-start gap-2 pt-2">
+                <input type="checkbox" id="lead-terms" required checked class="mt-1 accent-solvo-amber cursor-pointer rounded" />
+                <label for="lead-terms" class="text-[11px] text-slate-400">
+                  Concordo em receber o diagnóstico solar fotométrico e proposta via WhatsApp de acordo com a LGPD.
+                </label>
+              </div>
+
+              <!-- Botão Primário de Conversão para WhatsApp -->
+              <button type="submit" id="submit-lead-btn" class="w-full py-4 rounded-xl font-tech text-xs tracking-widest uppercase font-bold text-solvo-950 bg-gradient-to-r from-emerald-400 via-solvo-gold to-solvo-amber hover:from-emerald-300 hover:to-solvo-gold shadow-solar-glow transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2 cursor-pointer mt-4">
+                <i class="fa-brands fa-whatsapp text-base"></i>
+                <span>Enviar Simulação Para WhatsApp</span>
+              </button>
+
+              <div class="text-center">
+                <span class="text-[10px] text-slate-400 font-tech flex items-center justify-center gap-1.5">
+                  <i class="fa-solid fa-shield-check text-emerald-400"></i> Seus dados estão protegidos com criptografia SSL 256-bit.
+                </span>
+              </div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. JORNADA DE IMPLEMENTAÇÃO (COMO FUNCIONA EM 4 PASSOS) -->
+    <section class="py-20 bg-solvo-900/30 border-y border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="font-tech text-xs uppercase tracking-widest text-solvo-gold">Processo Sem Burocracia</span>
+          <h2 class="font-monumental text-2xl sm:text-4xl font-extrabold uppercase text-white mt-2">
+            Da Simulação à Usina Gerando em 4 Passos
+          </h2>
+          <p class="text-slate-400 text-xs sm:text-sm mt-3">
+            Cuidamos de 100% da cadeia técnica e regulatória para que sua única preocupação seja ver a conta de energia cair.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+          
+          <!-- Passo 1 -->
+          <div class="glass-card p-6 rounded-2xl relative">
+            <div class="font-monumental text-3xl font-extrabold text-solvo-gold/30 mb-3">01</div>
+            <h3 class="font-tech text-sm font-bold text-white uppercase tracking-wider mb-2">Diagnóstico Fotogramétrico</h3>
+            <p class="text-xs text-slate-300/80 leading-relaxed">
+              Mapeamento solar tridimensional com software de sombreamento para posicionamento milimétrico dos módulos.
+            </p>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="glass-card p-6 rounded-2xl relative">
+            <div class="font-monumental text-3xl font-extrabold text-solvo-gold/30 mb-3">02</div>
+            <h3 class="font-tech text-sm font-bold text-white uppercase tracking-wider mb-2">Engenharia & Concessionária</h3>
+            <p class="text-xs text-slate-300/80 leading-relaxed">
+              Elaboração dos diagramas unifilares, emissão de ART junto ao CREA e aprovação do parecer de acesso sem fricção.
+            </p>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="glass-card p-6 rounded-2xl relative">
+            <div class="font-monumental text-3xl font-extrabold text-solvo-gold/30 mb-3">03</div>
+            <h3 class="font-tech text-sm font-bold text-white uppercase tracking-wider mb-2">Instalação & Comissionamento</h3>
+            <p class="text-xs text-slate-300/80 leading-relaxed">
+              Montagem limpa por engenheiros e eletrotécnicos certificados NR10/NR35 com fixação estrutural reforçada.
+            </p>
+          </div>
+
+          <!-- Passo 4 -->
+          <div class="glass-card p-6 rounded-2xl relative">
+            <div class="font-monumental text-3xl font-extrabold text-solvo-gold/30 mb-3">04</div>
+            <h3 class="font-tech text-sm font-bold text-white uppercase tracking-wider mb-2">Ativação & Telemetria IoT</h3>
+            <p class="text-xs text-slate-300/80 leading-relaxed">
+              Troca do medidor bidirecional e liberação do aplicativo exclusivo Solvo para acompanhamento de geração em tempo real.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 8. DEPOIMENTOS DE CLIENTES EXECUTIVOS & CASOS REAIS -->
+    <section class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-16 gap-6">
+          <div>
+            <span class="font-tech text-xs uppercase tracking-widest text-solvo-gold">Casos Reais de Sucesso</span>
+            <h2 class="font-monumental text-3xl sm:text-4xl font-extrabold uppercase text-white mt-1">
+              Quem Migrou para a Solvo Energia
+            </h2>
+          </div>
+          <div class="flex items-center gap-2 text-xs font-tech text-emerald-400">
+            <i class="fa-solid fa-star text-solvo-gold"></i>
+            <i class="fa-solid fa-star text-solvo-gold"></i>
+            <i class="fa-solid fa-star text-solvo-gold"></i>
+            <i class="fa-solid fa-star text-solvo-gold"></i>
+            <i class="fa-solid fa-star text-solvo-gold"></i>
+            <span class="text-slate-300 font-semibold ml-1">4.9 / 5.0 (Mais de 1.200 avaliações)</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Testimonial 1 -->
+          <div class="glass-card p-8 rounded-3xl flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 text-solvo-gold text-xs mb-4">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed italic mb-6">
+                "Nossa conta no centro de distribuição em Campinas passou de R$ 24.000 para R$ 1.100 por mês. O projeto foi entregue 10 dias antes do prazo com acabamento impecável e suporte pós-venda exemplar."
+              </p>
+            </div>
+            <div class="border-t border-white/10 pt-4 flex items-center justify-between">
+              <div>
+                <div class="font-tech text-xs font-bold text-white">Eng. Marcos Vinicius Alencar</div>
+                <div class="text-[11px] text-slate-400">Diretor de Operações • LogSmart Brasil</div>
+              </div>
+              <div class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 text-[10px] font-tech">
+                -94% OPEX
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="glass-card p-8 rounded-3xl flex flex-col justify-between border-solvo-amber/20">
+            <div>
+              <div class="flex items-center gap-1 text-solvo-gold text-xs mb-4">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed italic mb-6">
+                "Instalamos 48 módulos no condomínio Alphaville. A equipe teve um cuidado cirúrgico com a impermeabilização das telhas e o inversor é totalmente silencioso. O aplicativo de monitoramento é viciante."
+              </p>
+            </div>
+            <div class="border-t border-white/10 pt-4 flex items-center justify-between">
+              <div>
+                <div class="font-tech text-xs font-bold text-white">Dra. Camila Nogueira Ribeiro</div>
+                <div class="text-[11px] text-slate-400">Residencial Premium • Barueri / SP</div>
+              </div>
+              <div class="px-2.5 py-1 rounded bg-solvo-amber/10 text-solvo-gold text-[10px] font-tech">
+                R$ 38k/ano econ.
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="glass-card p-8 rounded-3xl flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 text-solvo-gold text-xs mb-4">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed italic mb-6">
+                "Eletrificamos 3 pivôs de irrigação com usina de solo de 300 kWp. O payback estimado era de 3.5 anos e vamos quitar em 2.9 anos devido à alta irradiação e eficiência dos módulos bifaciais."
+              </p>
+            </div>
+            <div class="border-t border-white/10 pt-4 flex items-center justify-between">
+              <div>
+                <div class="font-tech text-xs font-bold text-white">Fernando Diniz Guimarães</div>
+                <div class="text-[11px] text-slate-400">Agropecuária Vale Verde • Rio Verde / GO</div>
+              </div>
+              <div class="px-2.5 py-1 rounded bg-solvo-cyan/10 text-cyan-300 text-[10px] font-tech">
+                300 kWp Agro
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 9. FAQ COM ACORDEÃO INTERATIVO -->
+    <section id="faq" class="py-20 bg-solvo-900/40 border-t border-white/10">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-12">
+          <span class="font-tech text-xs uppercase tracking-widest text-solvo-gold">Transparência Total</span>
+          <h2 class="font-monumental text-3xl font-extrabold uppercase text-white mt-1">
+            Perguntas Frequentes
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-400 mt-2">
+            Tire todas as dúvidas técnicas, financeiras e regulatórias sobre a adesão solar.
+          </p>
+        </div>
+
+        <div class="space-y-3" id="faq-accordion">
+          
+          <!-- Item 1 -->
+          <div class="glass-card rounded-2xl overflow-hidden border border-white/10">
+            <button class="faq-btn w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-tech text-sm font-semibold text-white hover:text-solvo-gold transition-colors">
+              <span>Como funciona a geração em dias chuvosos ou nublados?</span>
+              <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content hidden px-6 pb-4 text-xs text-slate-300/90 leading-relaxed">
+              Os módulos fotovoltaicos N-Type TOPCon utilizam irradiação difusa (espectro infravermelho e ultravioleta da luz natural), gerando entre 25% a 45% de sua capacidade mesmo sob chuva ou forte nebulosidade. O dimensionamento anual Solvo considera os índices pluviométricos históricos da sua região para cobrir o consumo integral.
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="glass-card rounded-2xl overflow-hidden border border-white/10">
+            <button class="faq-btn w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-tech text-sm font-semibold text-white hover:text-solvo-gold transition-colors">
+              <span>A Lei 14.300 (Marco Legal da GD) ainda torna a energia solar rentável?</span>
+              <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content hidden px-6 pb-4 text-xs text-slate-300/90 leading-relaxed">
+              Sim! O Marco Legal apenas regulamentou a remuneração pelo uso do fio (Fio B), o que representa uma fração mínima da tarifa. Com a tecnologia de alta densidade N-Type da Solvo e o aumento constante das tarifas das distribuidoras (média de 8% a 12% a.a.), o retorno sobre o investimento (ROI) continua extraordinário, com payback típico de 3 anos.
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="glass-card rounded-2xl overflow-hidden border border-white/10">
+            <button class="faq-btn w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-tech text-sm font-semibold text-white hover:text-solvo-gold transition-colors">
+              <span>Posso financiar 100% da usina sem dar entrada?</span>
+              <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content hidden px-6 pb-4 text-xs text-slate-300/90 leading-relaxed">
+              Sim. Mantemos parcerias com os principais bancos sustentáveis (Santander, BV, Sicredi, Sicoob, Banco do Brasil e Bradesco). Você pode parcelar o sistema em até 84 vezes com carência de até 120 dias, de forma que a própria economia da conta de luz paga a parcela mensal, gerando fluxo de caixa positivo imediato.
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="glass-card rounded-2xl overflow-hidden border border-white/10">
+            <button class="faq-btn w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-tech text-sm font-semibold text-white hover:text-solvo-gold transition-colors">
+              <span>O que acontece se houver queda de energia na rede da rua?</span>
+              <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content hidden px-6 pb-4 text-xs text-slate-300/90 leading-relaxed">
+              Sistemas On-Grid tradicionais desligam por exigência de segurança (função anti-ilhamento). Caso você opte pelo ecossistema híbrido com <strong>Solvo Storage (Baterias LiFePO4)</strong>, o sistema comuta em menos de 10 milissegundos, mantendo sua casa ou empresa com energia ininterrupta sem oscilações.
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="glass-card rounded-2xl overflow-hidden border border-white/10">
+            <button class="faq-btn w-full px-6 py-4 text-left flex items-center justify-between gap-4 font-tech text-sm font-semibold text-white hover:text-solvo-gold transition-colors">
+              <span>Qual é a manutenção necessária para o sistema fotovoltaico?</span>
+              <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content hidden px-6 pb-4 text-xs text-slate-300/90 leading-relaxed">
+              A manutenção é mínima. Os módulos contam com película antiaderente hidrofóbica, onde a própria água da chuva realiza a autolimpeza básica. Recomendamos uma lavagem com água e escova macia uma ou duas vezes ao ano e a inspeção das conexões elétricas, que são monitoradas digitalmente pelo nosso app 24 horas por dia.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 10. MODAL DE SUCESSO / CONFIRMAÇÃO VIP -->
+    <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+      <div class="glass-card p-6 sm:p-8 rounded-3xl border border-solvo-amber/40 max-w-md w-full text-center relative shadow-solar-glow">
+        <button id="close-modal-btn" aria-label="Fechar" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+        <div class="w-16 h-16 rounded-2xl bg-emerald-500/20 text-emerald-400 text-3xl flex items-center justify-center mx-auto mb-4 border border-emerald-500/30">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h3 class="font-monumental text-xl font-bold text-white uppercase">Simulação Transmitida!</h3>
+        <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+          Sua solicitação de estudo fotométrico foi formatada com sucesso. Se a janela do WhatsApp não tiver aberto automaticamente, clique no botão abaixo para iniciar a conversa com nosso engenheiro chefe:
+        </p>
+
+        <a id="modal-whatsapp-link" href="#" target="_blank" class="mt-6 w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-solvo-gold text-solvo-950 font-tech font-bold uppercase text-xs flex items-center justify-center gap-2 shadow-lg">
+          <i class="fa-brands fa-whatsapp text-base"></i> Abrir WhatsApp Agora
+        </a>
+      </div>
+    </div>
+
+    <!-- 11. FOOTER MONUMENTAL COM SELOS E INFORMAÇÕES CORPORATIVAS -->
+    <footer class="border-t border-white/10 bg-solvo-950 pt-16 pb-12 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+          
+          <!-- Coluna 1: Marca & Manifesto -->
+          <div class="lg:col-span-2">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-solvo-amber to-solvo-emerald p-[1px]">
+                <div class="w-full h-full bg-solvo-900 rounded-[11px] flex items-center justify-center">
+                  <i class="fa-solid fa-solar-panel text-solvo-gold text-lg"></i>
+                </div>
+              </div>
+              <div class="flex flex-col">
+                <span class="font-monumental text-2xl tracking-wider font-extrabold text-white">
+                  SOLVO<span class="text-solvo-amber">.</span>
+                </span>
+                <span class="font-tech text-[10px] tracking-[0.28em] text-solvo-silver/80 uppercase">
+                  Energia Solar Inteligente
+                </span>
+              </div>
+            </div>
+
+            <p class="mt-4 text-xs text-slate-400 max-w-sm leading-relaxed">
+              A Solvo Energia é referência nacional em engenharia fotovoltaica de alto rendimento, transição energética corporativa e armazenamento com baterias de lítio de última geração.
+            </p>
+
+            <div class="mt-6 flex items-center gap-3">
+              <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-lg glass-pill flex items-center justify-center text-slate-300 hover:text-solvo-gold transition-colors">
+                <i class="fa-brands fa-linkedin-in text-xs"></i>
+              </a>
+              <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-lg glass-pill flex items-center justify-center text-slate-300 hover:text-solvo-gold transition-colors">
+                <i class="fa-brands fa-instagram text-xs"></i>
+              </a>
+              <a href="#" aria-label="YouTube" class="w-9 h-9 rounded-lg glass-pill flex items-center justify-center text-slate-300 hover:text-solvo-gold transition-colors">
+                <i class="fa-brands fa-youtube text-xs"></i>
+              </a>
+              <a href="#" aria-label="WhatsApp" class="w-9 h-9 rounded-lg glass-pill flex items-center justify-center text-slate-300 hover:text-emerald-400 transition-colors">
+                <i class="fa-brands fa-whatsapp text-xs"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Coluna 2: Soluções -->
+          <div>
+            <h4 class="font-tech text-xs uppercase tracking-wider text-white font-bold mb-4">Engenharia</h4>
+            <ul class="space-y-2.5 text-xs text-slate-400 font-sans">
+              <li><a href="#solucoes" class="hover:text-solvo-gold transition-colors">Residencial High-End</a></li>
+              <li><a href="#solucoes" class="hover:text-solvo-gold transition-colors">Comercial & Varejo</a></li>
+              <li><a href="#solucoes" class="hover:text-solvo-gold transition-colors">Usinas de Solo Agro</a></li>
+              <li><a href="#solucoes" class="hover:text-solvo-gold transition-colors">Armazenamento BESS LiFePO4</a></li>
+              <li><a href="#tecnologia" class="hover:text-solvo-gold transition-colors">Módulos N-Type TOPCon</a></li>
+            </ul>
+          </div>
+
+          <!-- Coluna 3: Institucional -->
+          <div>
+            <h4 class="font-tech text-xs uppercase tracking-wider text-white font-bold mb-4">Institucional</h4>
+            <ul class="space-y-2.5 text-xs text-slate-400 font-sans">
+              <li><a href="#metricas" class="hover:text-solvo-gold transition-colors">Nossa Trajetória</a></li>
+              <li><a href="#diferenciais" class="hover:text-solvo-gold transition-colors">Garantia & Seguros</a></li>
+              <li><a href="#simulador" class="hover:text-solvo-gold transition-colors">Simulador Financeiro</a></li>
+              <li><a href="#faq" class="hover:text-solvo-gold transition-colors">Perguntas Frequentes</a></li>
+              <li><a href="#simulador" class="hover:text-solvo-gold transition-colors">Canal de Parcerias</a></li>
+            </ul>
+          </div>
+
+          <!-- Coluna 4: Contato & Compliance -->
+          <div>
+            <h4 class="font-tech text-xs uppercase tracking-wider text-white font-bold mb-4">Central Técnica</h4>
+            <ul class="space-y-2.5 text-xs text-slate-400 font-sans">
+              <li class="flex items-center gap-2">
+                <i class="fa-solid fa-phone text-solvo-gold text-[10px]"></i>
+                <span>0800 591 2026</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fa-brands fa-whatsapp text-emerald-400 text-xs"></i>
+                <span>(11) 97820-5000</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fa-solid fa-envelope text-slate-400 text-[10px]"></i>
+                <span>engenharia@solvoenergia.com.br</span>
+              </li>
+              <li class="flex items-start gap-2 pt-1 text-[11px] text-slate-500">
+                <i class="fa-solid fa-location-dot text-slate-400 text-[10px] mt-0.5"></i>
+                <span>Av. Brigadeiro Faria Lima, 3477 • Itaim Bibi, São Paulo - SP</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Linha Inferior com Copyright & Selos Técnicos -->
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-tech">
+          <div>
+            &copy; 2026 Solvo Energia Soluções Sustentáveis S.A. • CNPJ: 42.189.702/0001-90 • Todos os direitos reservados.
+          </div>
+          <div class="flex items-center gap-4 text-slate-400">
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-solvo-gold"></i> Termos de Uso</span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-lock text-emerald-400"></i> Privacidade & LGPD</span>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+    <!-- Botão Flutuante de Atendimento Rápido WhatsApp -->
+    <a href="#simulador" aria-label="Atendimento Rápido WhatsApp" class="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-emerald-400 text-solvo-950 flex items-center justify-center shadow-emerald-glow hover:scale-110 active:scale-95 transition-transform duration-300">
+      <i class="fa-brands fa-whatsapp text-2xl text-white"></i>
+      <span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-solvo-gold border-2 border-solvo-950"></span>
+    </a>
+
+    <!-- VANILLA JS SCRIPT: THREE.JS 3D HERO + SIMULADOR + CONTADORES + WHATSAPP CHECKOUT -->
+    <script>
+      (function() {
+        'use strict';
+
+        // -------------------------------------------------------------
+        // 1. THREE.JS INTERACTIVE 3D SCENE (HERO SECTION AT 35° INCLINATION)
+        // -------------------------------------------------------------
+        const canvas = document.getElementById('solar-hero-canvas');
+        if (canvas && typeof THREE !== 'undefined') {
+          const container = canvas.parentElement;
+          const scene = new THREE.Scene();
+          
+          // Camera
+          const camera = new THREE.PerspectiveCamera(
+            45,
+            container.clientWidth / container.clientHeight,
+            0.1,
+            100
+          );
+          camera.position.set(0, 0, 7.2);
+
+          // Renderer
+          const renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            antialias: true,
+            alpha: true,
+            powerPreference: 'high-performance'
+          });
+          renderer.setSize(container.clientWidth, container.clientHeight);
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+          renderer.toneMapping = THREE.ACESFilmicToneMapping;
+          renderer.toneMappingExposure = 1.25;
+
+          // Studio Lighting Rig
+          const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+          scene.add(ambientLight);
+
+          // Golden Warm Key Light (simulating dramatic solar ray angle)
+          const keyLight = new THREE.DirectionalLight(0xfbbf24, 2.2);
+          keyLight.position.set(5, 8, 6);
+          scene.add(keyLight);
+
+          // Cool Sky Fill Light
+          const fillLight = new THREE.DirectionalLight(0x38bdf8, 1.2);
+          fillLight.position.set(-6, -4, 4);
+          scene.add(fillLight);
+
+          // Back Rim Light
+          const rimLight = new THREE.DirectionalLight(0x10b981, 1.5);
+          rimLight.position.set(0, -6, -4);
+          scene.add(rimLight);
+
+          // Master Root Pivot
+          const masterPivot = new THREE.Group();
+          // User requested dramatic 35° floating angle:
+          // 35 degrees = 35 * Math.PI / 180 = ~0.61 rad
+          const BASE_ROTATION_X = 0.61;
+          const BASE_ROTATION_Y = -0.42;
+          const BASE_ROTATION_Z = 0.18;
+          masterPivot.rotation.set(BASE_ROTATION_X, BASE_ROTATION_Y, BASE_ROTATION_Z);
+          scene.add(masterPivot);
+
+          // Procedural Photovoltaic Texture Generator
+          function generateSolarCellTexture() {
+            const size = 1024;
+            const texCanvas = document.createElement('canvas');
+            texCanvas.width = size;
+            texCanvas.height = size;
+            const ctx = texCanvas.getContext('2d');
+
+            // Deep blue/black anti-reflective silicon base
+            const bgGradient = ctx.createLinearGradient(0, 0, size, size);
+            bgGradient.addColorStop(0, '#040b19');
+            bgGradient.addColorStop(0.5, '#06132b');
+            bgGradient.addColorStop(1, '#020712');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, size, size);
+
+            // Solar cell grid (6 columns x 10 rows)
+            const cols = 6;
+            const rows = 10;
+            const cellW = size / cols;
+            const cellH = size / rows;
+            const gap = 6;
+
+            for (let c = 0; c < cols; c++) {
+              for (let r = 0; r < rows; r++) {
+                const x = c * cellW + gap / 2;
+                const y = r * cellH + gap / 2;
+                const w = cellW - gap;
+                const h = cellH - gap;
+
+                // Cell base with subtle crystalline texture
+                ctx.fillStyle = '#081736';
+                ctx.fillRect(x, y, w, h);
+
+                // Micro busbars / silver conductors across the cell
+                ctx.strokeStyle = 'rgba(210, 230, 255, 0.28)';
+                ctx.lineWidth = 1.5;
+                const busbars = 4;
+                for (let b = 1; b <= busbars; b++) {
+                  const bx = x + (w / (busbars + 1)) * b;
+                  ctx.beginPath();
+                  ctx.moveTo(bx, y);
+                  ctx.lineTo(bx, y + h);
+                  ctx.stroke();
+                }
+
+                // Micro fingers (ultra fine perpendicular lines)
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+                ctx.lineWidth = 0.5;
+                for (let f = 4; f < h; f += 8) {
+                  ctx.beginPath();
+                  ctx.moveTo(x, y + f);
+                  ctx.lineTo(x + w, y + f);
+                  ctx.stroke();
+                }
+
+                // Solar cell chamfered corners
+                ctx.fillStyle = '#030814';
+                const cornerSize = 8;
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x + cornerSize, y);
+                ctx.lineTo(x, y + cornerSize);
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.moveTo(x + w, y);
+                ctx.lineTo(x + w - cornerSize, y);
+                ctx.lineTo(x + w, y + cornerSize);
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.moveTo(x, y + h);
+                ctx.lineTo(x + cornerSize, y + h);
+                ctx.lineTo(x, y + h - cornerSize);
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.moveTo(x + w, y + h);
+                ctx.lineTo(x + w - cornerSize, y + h);
+                ctx.lineTo(x + w, y + h - cornerSize);
+                ctx.fill();
+              }
+            }
+
+            const texture = new THREE.CanvasTexture(texCanvas);
+            texture.generateMipmaps = true;
+            return texture;
+          }
+
+          // Build Composite 3D Models
+          const modelsGroup = new THREE.Group();
+          masterPivot.add(modelsGroup);
+
+          // 1) Solar Panel Model (N-Type Module)
+          const panelGroup = new THREE.Group();
+          
+          // Anodized Aluminum Outer Frame
+          const frameWidth = 2.8;
+          const frameHeight = 4.4;
+          const frameDepth = 0.12;
+          const frameGeo = new THREE.BoxGeometry(frameWidth, frameHeight, frameDepth);
+          const frameMat = new THREE.MeshStandardMaterial({
+            color: 0x1e293b,
+            metalness: 0.9,
+            roughness: 0.25
+          });
+          const frameMesh = new THREE.Mesh(frameGeo, frameMat);
+          panelGroup.add(frameMesh);
+
+          // Photovoltaic Cell Surface
+          const pvGeo = new THREE.PlaneGeometry(frameWidth - 0.08, frameHeight - 0.08);
+          const pvMat = new THREE.MeshStandardMaterial({
+            map: generateSolarCellTexture(),
+            roughness: 0.18,
+            metalness: 0.82
+          });
+          const pvMesh = new THREE.Mesh(pvGeo, pvMat);
+          pvMesh.position.z = frameDepth / 2 + 0.002;
+          panelGroup.add(pvMesh);
+
+          // Anti-Reflective Specular Glass Layer
+          const glassGeo = new THREE.PlaneGeometry(frameWidth - 0.04, frameHeight - 0.04);
+          const glassMat = new THREE.MeshPhysicalMaterial({
+            color: 0x88ccff,
+            transparent: true,
+            opacity: 0.25,
+            roughness: 0.05,
+            metalness: 0.1,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.08
+          });
+          const glassMesh = new THREE.Mesh(glassGeo, glassMat);
+          glassMesh.position.z = frameDepth / 2 + 0.006;
+          panelGroup.add(glassMesh);
+
+          // Glowing Accent Line (energy conduit simulation)
+          const edgeGeo = new THREE.BoxGeometry(frameWidth + 0.02, 0.03, 0.02);
+          const edgeMat = new THREE.MeshBasicMaterial({ color: 0xfbbf24 });
+          const edgeTop = new THREE.Mesh(edgeGeo, edgeMat);
+          edgeTop.position.set(0, frameHeight / 2 + 0.01, frameDepth / 2);
+          panelGroup.add(edgeTop);
+
+          const edgeBottom = new THREE.Mesh(edgeGeo, edgeMat);
+          edgeBottom.position.set(0, -frameHeight / 2 - 0.01, frameDepth / 2);
+          panelGroup.add(edgeBottom);
+
+          // Rear Inverter Box & Junction
+          const rearBoxGeo = new THREE.BoxGeometry(0.7, 0.7, 0.2);
+          const rearBoxMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.5 });
+          const rearBox = new THREE.Mesh(rearBoxGeo, rearBoxMat);
+          rearBox.position.set(0, 0.6, -frameDepth / 2 - 0.1);
+          panelGroup.add(rearBox);
+
+          modelsGroup.add(panelGroup);
+
+          // 2) Battery Storage Model
+          const storageGroup = new THREE.Group();
+          storageGroup.visible = false;
+          const cabinetGeo = new THREE.BoxGeometry(2.4, 3.8, 1.2);
+          const cabinetMat = new THREE.MeshStandardMaterial({
+            color: 0x0f172a,
+            metalness: 0.85,
+            roughness: 0.2
+          });
+          const cabinet = new THREE.Mesh(cabinetGeo, cabinetMat);
+          storageGroup.add(cabinet);
+
+          // Battery Status LED Bars
+          for (let i = 0; i < 4; i++) {
+            const barGeo = new THREE.BoxGeometry(1.6, 0.1, 0.02);
+            const barMat = new THREE.MeshBasicMaterial({ color: 0x10b981 });
+            const bar = new THREE.Mesh(barGeo, barMat);
+            bar.position.set(0, 1.1 - i * 0.7, 0.61);
+            storageGroup.add(bar);
+          }
+          modelsGroup.add(storageGroup);
+
+          // 3) Smart Inverter Model
+          const inverterGroup = new THREE.Group();
+          inverterGroup.visible = false;
+          const invGeo = new THREE.BoxGeometry(2.2, 3.2, 0.8);
+          const invMat = new THREE.MeshStandardMaterial({
+            color: 0x1e293b,
+            metalness: 0.9,
+            roughness: 0.15
+          });
+          const invMesh = new THREE.Mesh(invGeo, invMat);
+          inverterGroup.add(invMesh);
+
+          const screenGeo = new THREE.PlaneGeometry(1.2, 0.8);
+          const screenMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+          const screen = new THREE.Mesh(screenGeo, screenMat);
+          screen.position.set(0, 0.5, 0.41);
+          inverterGroup.add(screen);
+          modelsGroup.add(inverterGroup);
+
+          // 4) EV Wallbox Model
+          const evGroup = new THREE.Group();
+          evGroup.visible = false;
+          const evBaseGeo = new THREE.BoxGeometry(1.8, 2.6, 0.7);
+          const evBaseMat = new THREE.MeshStandardMaterial({
+            color: 0x111827,
+            metalness: 0.8,
+            roughness: 0.3
+          });
+          const evBase = new THREE.Mesh(evBaseGeo, evBaseMat);
+          evGroup.add(evBase);
+
+          const ringGeo = new THREE.TorusGeometry(0.5, 0.05, 16, 32);
+          const ringMat = new THREE.MeshBasicMaterial({ color: 0xa855f7 });
+          const ring = new THREE.Mesh(ringGeo, ringMat);
+          ring.position.set(0, 0.2, 0.36);
+          evGroup.add(ring);
+          modelsGroup.add(evGroup);
+
+          // Particles Field (Solar Photons in Suspension)
+          const particleCount = 220;
+          const particleGeo = new THREE.BufferGeometry();
+          const positions = new Float32Array(particleCount * 3);
+          const colors = new Float32Array(particleCount * 3);
+
+          const goldColor = new THREE.Color(0xfbbf24);
+          const emeraldColor = new THREE.Color(0x34d399);
+
+          for (let i = 0; i < particleCount; i++) {
+            positions[i * 3] = (Math.random() - 0.5) * 12;
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 12;
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
+
+            const mixedColor = Math.random() > 0.5 ? goldColor : emeraldColor;
+            colors[i * 3] = mixedColor.r;
+            colors[i * 3 + 1] = mixedColor.g;
+            colors[i * 3 + 2] = mixedColor.b;
+          }
+
+          particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+          particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+          const particleMat = new THREE.PointsMaterial({
+            size: 0.065,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.75,
+            blending: THREE.AdditiveBlending
+          });
+
+          const particleSystem = new THREE.Points(particleGeo, particleMat);
+          scene.add(particleSystem);
+
+          // Interaction & Damped Physics (LERP)
+          let targetMouseX = 0;
+          let targetMouseY = 0;
+          let currentMouseX = 0;
+          let currentMouseY = 0;
+          let isDragging = false;
+          let prevPointerX = 0;
+          let prevPointerY = 0;
+
+          function handlePointerMove(e) {
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            const rect = canvas.getBoundingClientRect();
+            
+            // Normalized -1 to +1 relative to hero canvas
+            targetMouseX = ((clientX - rect.left) / rect.width) * 2 - 1;
+            targetMouseY = -(((clientY - rect.top) / rect.height) * 2 - 1);
+
+            if (isDragging) {
+              const deltaX = (clientX - prevPointerX) * 0.005;
+              const deltaY = (clientY - prevPointerY) * 0.005;
+              masterPivot.rotation.y += deltaX;
+              masterPivot.rotation.x += deltaY;
+              prevPointerX = clientX;
+              prevPointerY = clientY;
+            }
+          }
+
+          function handlePointerDown(e) {
+            isDragging = true;
+            prevPointerX = e.touches ? e.touches[0].clientX : e.clientX;
+            prevPointerY = e.touches ? e.touches[0].clientY : e.clientY;
+          }
+
+          function handlePointerUp() {
+            isDragging = false;
+          }
+
+          window.addEventListener('mousemove', handlePointerMove);
+          canvas.addEventListener('touchstart', handlePointerDown, { passive: true });
+          canvas.addEventListener('touchmove', handlePointerMove, { passive: true });
+          window.addEventListener('touchend', handlePointerUp);
+          canvas.addEventListener('mousedown', handlePointerDown);
+          window.addEventListener('mouseup', handlePointerUp);
+
+          // Resize Handler
+          function handleResize() {
+            if (!container) return;
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+          }
+          window.addEventListener('resize', handleResize);
+
+          // Animation Loop with Smooth Damping (LERP)
+          let clock = new THREE.Clock();
+
+          function animate() {
+            requestAnimationFrame(animate);
+            const elapsedTime = clock.getElapsedTime();
+
+            // Smooth Lerp of mouse coordinates
+            currentMouseX += (targetMouseX - currentMouseX) * 0.045;
+            currentMouseY += (targetMouseY - currentMouseY) * 0.045;
+
+            // Apply orientation with gentle levitation
+            if (!isDragging) {
+              masterPivot.rotation.x = BASE_ROTATION_X + currentMouseY * 0.35 + Math.sin(elapsedTime * 1.4) * 0.04;
+              masterPivot.rotation.y = BASE_ROTATION_Y + currentMouseX * 0.45;
+              masterPivot.rotation.z = BASE_ROTATION_Z + Math.cos(elapsedTime * 1.1) * 0.02;
+            }
+
+            // Floating elevation
+            masterPivot.position.y = Math.sin(elapsedTime * 1.8) * 0.12;
+
+            // Slowly drift particles
+            particleSystem.rotation.y = elapsedTime * 0.04;
+            particleSystem.rotation.x = Math.sin(elapsedTime * 0.02) * 0.1;
+
+            renderer.render(scene, camera);
+          }
+          animate();
+
+          // Product Switcher Integration
+          const switcherBtns = document.querySelectorAll('#product-switcher .product-btn');
+          const spec1 = document.getElementById('spec-1');
+          const spec2 = document.getElementById('spec-2');
+          const spec3 = document.getElementById('spec-3');
+
+          const specsData = {
+            panel: {
+              s1: '23.8% N-Type TOPCon',
+              s2: '25 Anos de Potência',
+              s3: 'Telemetria IoT 24/7'
+            },
+            storage: {
+              s1: '15 kWh LiFePO4 6000 Ciclos',
+              s2: '10 Anos de Garantia Total',
+              s3: 'Comutação <10ms UPS'
+            },
+            inverter: {
+              s1: '99.2% Eficiência Euro',
+              s2: '12 Anos com Suporte',
+              s3: 'MPPT Quádruplo com IA'
+            },
+            ev: {
+              s1: '22 kW AC Carregamento Ultra',
+              s2: 'Proteção IP65 & IK10',
+              s3: 'RFID + Gestão Solar App'
+            }
+          };
+
+          switcherBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+              switcherBtns.forEach(b => {
+                b.classList.remove('active', 'border-solvo-amber/60', 'bg-solvo-amber/10');
+                b.classList.add('border-white/10', 'bg-solvo-900/60');
+              });
+              btn.classList.add('active', 'border-solvo-amber/60', 'bg-solvo-amber/10');
+              btn.classList.remove('border-white/10', 'bg-solvo-900/60');
+
+              const prod = btn.dataset.product;
+
+              // Hide all, show target
+              panelGroup.visible = (prod === 'panel');
+              storageGroup.visible = (prod === 'storage');
+              inverterGroup.visible = (prod === 'inverter');
+              evGroup.visible = (prod === 'ev');
+
+              // Update telemetry texts
+              if (specsData[prod] && spec1 && spec2 && spec3) {
+                spec1.textContent = specsData[prod].s1;
+                spec2.textContent = specsData[prod].s2;
+                spec3.textContent = specsData[prod].s3;
+              }
+            });
+          });
+        }
+
+        // -------------------------------------------------------------
+        // 2. SIMULADOR FINANCEIRO INTERATIVO EM TEMPO REAL
+        // -------------------------------------------------------------
+        const billSlider = document.getElementById('bill-slider');
+        const billInput = document.getElementById('bill-input');
+        const stateSelect = document.getElementById('state-select');
+        const propertyType = document.getElementById('property-type');
+
+        const resMonthly = document.getElementById('res-monthly');
+        const res1year = document.getElementById('res-1year');
+        const res5years = document.getElementById('res-5years');
+        const res25years = document.getElementById('res-25years');
+        const resPower = document.getElementById('res-power');
+        const resPanels = document.getElementById('res-panels');
+        const resPayback = document.getElementById('res-payback');
+
+        function formatBRL(val) {
+          return val.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+        }
+
+        function calculateSolarROI() {
+          const currentBill = parseFloat(billInput ? billInput.value : 1800) || 1800;
+          const selectedOption = stateSelect ? stateSelect.options[stateSelect.selectedIndex] : null;
+          const hsp = selectedOption ? parseFloat(selectedOption.dataset.sun || '4.8') : 4.8;
+          
+          // Economia média percentual (descontando custo de disponibilidade de acordo com a ANEEL)
+          let economyFactor = 0.93; // 93% a 95% de redução real
+          const monthlySavings = currentBill * economyFactor;
+
+          // Estimativa de 1 ano
+          const year1 = monthlySavings * 12;
+
+          // Estimativa de 5 anos (com projeção de inflação energética média de 7.5% ao ano)
+          let year5Total = 0;
+          let tempMonthly = monthlySavings;
+          for (let y = 0; y < 5; y++) {
+            year5Total += tempMonthly * 12;
+            tempMonthly *= 1.075;
+          }
+
+          // Estimativa acumulada em 25 anos
+          let year25Total = 0;
+          let tempMonthly25 = monthlySavings;
+          for (let y = 0; y < 25; y++) {
+            year25Total += tempMonthly25 * 12;
+            tempMonthly25 *= 1.055;
+          }
+
+          // Dimensionamento de Engenharia:
+          // kWh mensal = Conta / tarifa média estimada (~R$ 0.95/kWh)
+          const kwhMonth = currentBill / 0.96;
+          // kWp = kwhMonth / (HSP * 30 * performanceRatio 0.78)
+          const kWp = Math.max(1.8, (kwhMonth / (hsp * 30 * 0.78)));
+          // Painéis Solvo 670W N-Type
+          const panels = Math.ceil((kWp * 1000) / 670);
+
+          // Payback estimado
+          const costEstimated = kWp * 3200; // Custo médio de mercado Turnkey premium
+          const paybackYears = Math.min(4.5, Math.max(2.4, (costEstimated / year1)));
+
+          // Atualizar interface
+          if (resMonthly) resMonthly.textContent = formatBRL(monthlySavings);
+          if (res1year) res1year.textContent = 'R$ ' + formatBRL(year1);
+          if (res5years) res5years.textContent = 'R$ ' + formatBRL(year5Total);
+          if (res25years) res25years.textContent = 'R$ ' + formatBRL(year25Total);
+          if (resPower) resPower.textContent = kWp.toFixed(1) + ' kWp';
+          if (resPanels) resPanels.textContent = panels + ' Placas';
+          if (resPayback) resPayback.textContent = paybackYears.toFixed(1) + ' Anos';
+        }
+
+        // -------------------------------------------------------------
+        // ATLAS SOLAR INTERATIVO DO BRASIL: DADOS & SINCRONIZAÇÃO
+        // -------------------------------------------------------------
+        const regionsData = {
+          nordeste: {
+            name: 'Região Nordeste • Cinturão Solar',
+            hsp: 5.6,
+            rank: 'Top 1 Brasil',
+            annual: '2.044 kWh/m²',
+            kwhKwp: '1.680 kWh/kWp/ano',
+            payback: '2.5 a 2.8 Anos',
+            desc: 'O semiárido nordestino e o Vale do São Francisco registram os maiores índices de irradiação solar da América do Sul, gerando até 24% mais energia por placa instalada.',
+            states: 'BA, CE, PE, PI, RN, PB, MA, AL, SE',
+            defaultState: 'BA'
+          },
+          'centro-oeste': {
+            name: 'Região Centro-Oeste • Cerrado Solar',
+            hsp: 5.2,
+            rank: 'Top 2 Brasil',
+            annual: '1.898 kWh/m²',
+            kwhKwp: '1.560 kWh/kWp/ano',
+            payback: '2.8 a 3.1 Anos',
+            desc: 'Baixa nebulosidade durante a maior parte do ano e relevo plano ideal para usinas agropecuárias e corporativas com insolação constante.',
+            states: 'MT, MS, GO, DF',
+            defaultState: 'GO'
+          },
+          sudeste: {
+            name: 'Região Sudeste • Centro Consumidor',
+            hsp: 4.8,
+            rank: 'Maior Economia em R$',
+            annual: '1.752 kWh/m²',
+            kwhKwp: '1.440 kWh/kWp/ano',
+            payback: '2.9 a 3.3 Anos',
+            desc: 'Combinação estratégica de excelente insolação e as tarifas elétricas mais altas do país, resultando na maior economia absoluta em Reais por mês.',
+            states: 'SP, MG, RJ, ES',
+            defaultState: 'SP'
+          },
+          sul: {
+            name: 'Região Sul • Eficiência Térmica',
+            hsp: 4.4,
+            rank: 'Menor Perda Térmica',
+            annual: '1.606 kWh/m²',
+            kwhKwp: '1.320 kWh/kWp/ano',
+            payback: '3.2 a 3.6 Anos',
+            desc: 'O clima ameno beneficia os módulos N-Type, reduzindo perdas por superaquecimento e mantendo estabilidade operacional prolongada.',
+            states: 'PR, SC, RS',
+            defaultState: 'RS'
+          },
+          norte: {
+            name: 'Região Norte • Radiação Difusa',
+            hsp: 4.6,
+            rank: 'Excelente Radiação Difusa',
+            annual: '1.679 kWh/m²',
+            kwhKwp: '1.380 kWh/kWp/ano',
+            payback: '3.1 a 3.5 Anos',
+            desc: 'Alta irradiação difusa ao longo de todo o ano, com aproveitamento excepcional através de módulos bifaciais que captam luz de múltiplos ângulos.',
+            states: 'PA, AM, RO, TO, AC, RR, AP',
+            defaultState: 'PA'
+          }
+        };
+
+        const mapRegionPaths = document.querySelectorAll('.brazil-region');
+        const regionPillBtns = document.querySelectorAll('.region-pill-btn');
+        const mapRegionTag = document.getElementById('map-region-tag');
+        const mapRegionRank = document.getElementById('map-region-rank');
+        const mapRegionHsp = document.getElementById('map-region-hsp');
+        const mapRegionAnnual = document.getElementById('map-region-annual');
+        const mapRegionKwhKwp = document.getElementById('map-region-kwh-kwp');
+        const mapRegionPayback = document.getElementById('map-region-payback');
+        const mapRegionDesc = document.getElementById('map-region-desc');
+        const mapRegionStates = document.getElementById('map-region-states');
+        const applyRegionBtn = document.getElementById('apply-region-btn');
+
+        function setActiveRegion(regionId, updateSelect = true) {
+          const data = regionsData[regionId];
+          if (!data) return;
+
+          // Atualizar classes dos caminhos SVG
+          mapRegionPaths.forEach(p => {
+            if (p.getAttribute('data-region') === regionId) {
+              p.classList.add('active-region');
+            } else {
+              p.classList.remove('active-region');
+            }
+          });
+
+          // Atualizar botões rápidos de região
+          regionPillBtns.forEach(btn => {
+            if (btn.getAttribute('data-region') === regionId) {
+              btn.classList.add('active', 'bg-solvo-amber/20', 'border-solvo-amber/40', 'text-solvo-gold');
+              btn.classList.remove('bg-solvo-900', 'border-white/10', 'text-slate-300');
+            } else {
+              btn.classList.remove('active', 'bg-solvo-amber/20', 'border-solvo-amber/40', 'text-solvo-gold');
+              btn.classList.add('bg-solvo-900', 'border-white/10', 'text-slate-300');
+            }
+          });
+
+          // Atualizar telemetria da região
+          if (mapRegionTag) mapRegionTag.textContent = data.name;
+          if (mapRegionRank) mapRegionRank.textContent = data.rank;
+          if (mapRegionHsp) mapRegionHsp.textContent = data.hsp.toFixed(1);
+          if (mapRegionAnnual) {
+            mapRegionAnnual.innerHTML = 'Equivalente a <strong class="text-white">' + data.annual + '</strong> de energia solar incidente por ano.';
+          }
+          if (mapRegionKwhKwp) mapRegionKwhKwp.textContent = data.kwhKwp;
+          if (mapRegionPayback) mapRegionPayback.textContent = data.payback;
+          if (mapRegionDesc) mapRegionDesc.textContent = data.desc;
+          if (mapRegionStates) mapRegionStates.textContent = data.states;
+
+          // Sincronizar com seletor de estados do simulador
+          if (updateSelect && stateSelect) {
+            stateSelect.value = data.defaultState;
+            calculateSolarROI();
+          }
+        }
+
+        mapRegionPaths.forEach(path => {
+          path.addEventListener('click', () => {
+            const region = path.getAttribute('data-region');
+            setActiveRegion(region, true);
+          });
+        });
+
+        regionPillBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const region = btn.getAttribute('data-region');
+            setActiveRegion(region, true);
+          });
+        });
+
+        if (applyRegionBtn) {
+          applyRegionBtn.addEventListener('click', () => {
+            const step1Card = document.getElementById('step-1-params');
+            if (step1Card) {
+              step1Card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              step1Card.classList.add('border-solvo-gold/60', 'shadow-solar-glow');
+              setTimeout(() => {
+                step1Card.classList.remove('border-solvo-gold/60', 'shadow-solar-glow');
+              }, 1200);
+            }
+          });
+        }
+
+        if (billSlider && billInput) {
+          billSlider.addEventListener('input', (e) => {
+            billInput.value = e.target.value;
+            calculateSolarROI();
+          });
+
+          billInput.addEventListener('input', (e) => {
+            let val = parseInt(e.target.value) || 300;
+            if (val > 50000) val = 50000;
+            billSlider.value = Math.min(val, 30000);
+            calculateSolarROI();
+          });
+        }
+
+        if (stateSelect) {
+          stateSelect.addEventListener('change', () => {
+            const selectedOpt = stateSelect.options[stateSelect.selectedIndex];
+            const region = selectedOpt ? selectedOpt.getAttribute('data-region') : null;
+            if (region) {
+              setActiveRegion(region, false);
+            }
+            calculateSolarROI();
+          });
+        }
+
+        if (propertyType) propertyType.addEventListener('change', calculateSolarROI);
+
+        calculateSolarROI();
+
+        // -------------------------------------------------------------
+        // 3. CONTADORES NUMÉRICOS ANIMADOS VIA INTERSECTION OBSERVER
+        // -------------------------------------------------------------
+        const counters = document.querySelectorAll('.counter-number');
+        let countersAnimated = false;
+
+        function animateCounters() {
+          counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            const duration = 1800; // ms
+            const startTime = performance.now();
+
+            function updateCounter(currentTime) {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              // Easing out cubic
+              const easeOut = 1 - Math.pow(1 - progress, 3);
+              const currentVal = Math.floor(easeOut * target);
+
+              if (target >= 1000) {
+                counter.textContent = currentVal.toLocaleString('pt-BR');
+              } else {
+                counter.textContent = currentVal;
+              }
+
+              if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+              } else {
+                counter.textContent = (target >= 1000) ? target.toLocaleString('pt-BR') : target;
+              }
+            }
+            requestAnimationFrame(updateCounter);
+          });
+        }
+
+        const metricsSection = document.getElementById('metricas');
+        if (metricsSection && 'IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && !countersAnimated) {
+                countersAnimated = true;
+                animateCounters();
+              }
+            });
+          }, { threshold: 0.25 });
+          observer.observe(metricsSection);
+        } else {
+          animateCounters();
+        }
+
+        // -------------------------------------------------------------
+        // 4. MÁSCARA AUTOMÁTICA DE TELEFONE (WHATSAPP)
+        // -------------------------------------------------------------
+        const phoneInput = document.getElementById('lead-phone');
+        if (phoneInput) {
+          phoneInput.addEventListener('input', (e) => {
+            let v = e.target.value.replace(/\D/g, '');
+            if (v.length > 11) v = v.slice(0, 11);
+            if (v.length > 6) {
+              e.target.value = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
+            } else if (v.length > 2) {
+              e.target.value = `(${v.slice(0, 2)}) ${v.slice(2)}`;
+            } else if (v.length > 0) {
+              e.target.value = `(${v}`;
+            }
+          });
+        }
+
+        // -------------------------------------------------------------
+        // 5. DISPARO DE CHECKOUT DIRETO PARA WHATSAPP
+        // -------------------------------------------------------------
+        const leadForm = document.getElementById('solar-lead-form');
+        const successModal = document.getElementById('success-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const modalWhatsappLink = document.getElementById('modal-whatsapp-link');
+
+        if (leadForm) {
+          leadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('lead-name').value.trim();
+            const phone = document.getElementById('lead-phone').value.trim();
+            const city = document.getElementById('lead-city').value.trim();
+            const utility = document.getElementById('lead-utility').value.trim() || 'Não informada';
+            const billValue = document.getElementById('bill-input').value;
+            const property = document.getElementById('property-type').value;
+            const selectedState = stateSelect ? stateSelect.value : 'SP';
+            const year1Val = res1year ? res1year.textContent : 'R$ 20.000';
+            const powerVal = resPower ? resPower.textContent : '14 kWp';
+
+            // Mensagem elegante sem emojis nativos conforme diretriz estrita
+            const message = 
+              `*SOLICITACAO DE ESTUDO SOLAR VIP - SOLVO ENERGIA*\n` +
+              `-----------------------------------------------\n` +
+              `*Nome do Titular:* ${name}\n` +
+              `*WhatsApp:* ${phone}\n` +
+              `*Localidade:* ${city} (${selectedState})\n` +
+              `*Concessionaria:* ${utility}\n` +
+              `*Perfil:* ${property.toUpperCase()}\n` +
+              `*Fatura Atual:* R$ ${billValue}/mes\n` +
+              `*Economia Estimada:* ${year1Val}/ano\n` +
+              `*Potencia Sugerida:* ${powerVal}\n` +
+              `-----------------------------------------------\n` +
+              `Ola Engenharia Solvo! Gostaria de receber meu diagnostico fotometrico e proposta formal gratuita via WhatsApp.`;
+
+            // Número oficial fictício / padrão de atendimento corporativo Solvo
+            const whatsappNumber = '5511978205000';
+            const encodedText = encodeURIComponent(message);
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedText}`;
+
+            // Configurar modal e abrir janela
+            if (modalWhatsappLink) {
+              modalWhatsappLink.href = whatsappUrl;
+            }
+
+            if (successModal) {
+              successModal.classList.remove('hidden');
+              setTimeout(() => {
+                successModal.classList.remove('opacity-0');
+              }, 20);
+            }
+
+            // Tenta abrir diretamente na nova aba
+            window.open(whatsappUrl, '_blank');
+          });
+        }
+
+        if (closeModalBtn && successModal) {
+          closeModalBtn.addEventListener('click', () => {
+            successModal.classList.add('opacity-0');
+            setTimeout(() => {
+              successModal.classList.add('hidden');
+            }, 300);
+          });
+        }
+
+        // -------------------------------------------------------------
+        // 6. FAQ ACCORDION (INTERATIVO)
+        // -------------------------------------------------------------
+        const faqButtons = document.querySelectorAll('.faq-btn');
+        faqButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const content = btn.nextElementSibling;
+            const chevron = btn.querySelector('.fa-chevron-down');
+            const isExpanded = !content.classList.contains('hidden');
+
+            // Fechar todos
+            document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.faq-btn .fa-chevron-down').forEach(ch => {
+              ch.style.transform = 'rotate(0deg)';
+            });
+
+            if (!isExpanded) {
+              content.classList.remove('hidden');
+              if (chevron) chevron.style.transform = 'rotate(180deg)';
+            }
+          });
+        });
+
+        // -------------------------------------------------------------
+        // 7. MENU MOBILE & HEADER SCROLL BLUR
+        // -------------------------------------------------------------
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        if (mobileToggle && mobileNav) {
+          mobileToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('hidden');
+          });
+
+          // Fechar ao clicar em links
+          mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+              mobileNav.classList.add('hidden');
+            });
+          });
+        }
+
+        const mainHeader = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 40) {
+            mainHeader.classList.add('border-white/10', 'bg-solvo-950/90');
+            mainHeader.classList.remove('border-transparent', 'bg-solvo-950/70');
+          } else {
+            mainHeader.classList.remove('border-white/10', 'bg-solvo-950/90');
+            mainHeader.classList.add('border-transparent', 'bg-solvo-950/70');
+          }
+        });
+
+      })();
+    </script>
+  </body>
+</html>
